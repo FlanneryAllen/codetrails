@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeTrails: The Collaboration Primitive</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #0A0A0B;
+            color: #FFFFFF;
+            overflow: hidden;
+            line-height: 1.6;
+        }
+
+        .presentation {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            width: 90%;
+            max-width: 1200px;
+            height: 85vh;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .slide.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 72px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #FF6B35;
+            letter-spacing: -2px;
+        }
+
+        h2 {
+            font-size: 56px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            line-height: 1.1;
+        }
+
+        h3 {
+            font-size: 42px;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #E0E0E0;
+        }
+
+        p {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #B0B0B0;
+            max-width: 800px;
+        }
+
+        strong {
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+
+        .visual {
+            background: #1A1A1B;
+            border: 1px solid #2A2A2B;
+            border-radius: 12px;
+            padding: 40px;
+            margin: 40px 0;
+            font-size: 18px;
+            color: #888;
+            font-style: italic;
+        }
+
+        .visual-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 40px 0;
+        }
+
+        .visual-box {
+            background: #1A1A1B;
+            border: 1px solid #2A2A2B;
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .highlight {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        .subtitle {
+            font-size: 28px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+
+        .bottom-line {
+            position: absolute;
+            bottom: 60px;
+            font-size: 20px;
+            color: #666;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 20px;
+            z-index: 100;
+        }
+
+        .btn {
+            background: #2A2A2B;
+            color: #888;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #FF6B35;
+            color: #FFFFFF;
+        }
+
+        .slide-counter {
+            display: flex;
+            align-items: center;
+            padding: 12px 24px;
+            background: #1A1A1B;
+            border-radius: 8px;
+            color: #888;
+        }
+
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        li {
+            font-size: 22px;
+            margin-bottom: 16px;
+            padding-left: 30px;
+            position: relative;
+            color: #B0B0B0;
+        }
+
+        li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #FF6B35;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .comparison-box {
+            background: #1A1A1B;
+            border-radius: 8px;
+            padding: 20px;
+        }
+
+        .comparison-box h4 {
+            color: #FF6B35;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .comparison-box p {
+            font-size: 16px;
+            color: #888;
+        }
+
+        .big-number {
+            font-size: 96px;
+            font-weight: 700;
+            color: #FF6B35;
+            margin: 20px 0;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            margin: 40px 0;
+            padding: 40px;
+            background: #1A1A1B;
+            border-radius: 12px;
+        }
+
+        .flow-step {
+            text-align: center;
+            flex: 1;
+        }
+
+        .flow-arrow {
+            color: #FF6B35;
+            font-size: 32px;
+            margin: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Slide 1: Hook -->
+        <div class="slide active">
+            <h1>CodeTrails</h1>
+            <h2>Software collaboration is broken.<br>We fixed it.</h2>
+            <div class="visual">
+                <strong>Visual:</strong> Single CodeTrails interface. A trail through code with Sarah's comment: "This breaks our payment flow"
+            </div>
+            <p class="bottom-line">One link. No IDE. Anyone contributes.</p>
+        </div>
+
+        <!-- Slide 2: What Actually Happens -->
+        <div class="slide">
+            <h2>An engineer needs feedback from someone not on their team.</h2>
+            <div class="visual">
+                <strong>Visual:</strong> The Calendar Abyss and Cloning Gauntlet comic
+            </div>
+            <p>One writes code. Three schedule the meeting. Five never show up.</p>
+        </div>
+
+        <!-- Slide 3: The Real Cost -->
+        <div class="slide">
+            <h2>Every question burns social capital.</h2>
+            <p>Engineers track favors like accountants track receipts. So they ship broken code instead of asking for help.</p>
+            <div class="visual">
+                <strong>Ledger:</strong><br>
+                Asked Tom for help (-1 favor)<br>
+                Scheduled meeting (-2 hours)<br>
+                Interrupted Jane (-1 goodwill)
+            </div>
+            <p>They're not lazy. They're preserving relationships.</p>
+        </div>
+
+        <!-- Slide 4: Frame.io Solved This -->
+        <div class="slide">
+            <h2>Frame.io Solved This for Video</h2>
+            <h3>Same transformation. Different medium.</h3>
+            <div class="comparison-grid">
+                <div class="comparison-box">
+                    <h4>Video before Frame.io</h4>
+                    <p>Email threads. "See notes at 1:23."</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>Video after</h4>
+                    <p>One link. Click anywhere.</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>Code before CodeTrails</h4>
+                    <p>Clone repo. "See line 142."</p>
+                </div>
+                <div class="comparison-box">
+                    <h4>Code after</h4>
+                    <p>One link. Click anywhere.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Your Digital Secretary -->
+        <div class="slide">
+            <h2>Your Digital Secretary</h2>
+            <h3>Someone filtered out the noise for you.</h3>
+            <ul>
+                <li>FileCity shows your codebase as buildings. Changed files light up.</li>
+                <li>The path shows intention, not diff.</li>
+                <li>Plain English explains what connects where.</li>
+                <li>The ask isn't "review this." It's "does this make sense?"</li>
+            </ul>
+            <p>Like reaching over to the desk next to you. Except they're in Prague.</p>
+        </div>
+
+        <!-- Slide 6: 15 Minutes Not 15 Days -->
+        <div class="slide">
+            <h2>15 Minutes Not 15 Days</h2>
+            <h3>Here's what happened yesterday.</h3>
+            <div class="flow-diagram">
+                <div class="flow-step">
+                    <p>Fernando needed feedback on auth changes</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <p>Created trail. Sent link.</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <p>Michael: "That breaks payment flow."</p>
+                </div>
+                <span class="flow-arrow">→</span>
+                <div class="flow-step">
+                    <p>Agent fixed it. Done.</p>
+                </div>
+            </div>
+            <p>No accountability transfer. Just contribution.</p>
+        </div>
+
+        <!-- Slide 7: Design Docs Are Fiction -->
+        <div class="slide">
+            <h2>Design Docs Are Fiction</h2>
+            <h3>Engineers write them. Nobody reads them.</h3>
+            <div class="visual">
+                <strong>Doc graveyard:</strong><br>
+                "Architecture v3" (4 months old)<br>
+                "Auth RFC" (already wrong)<br>
+                "Q3 Plan" (fiction)
+            </div>
+            <p>They live outside the code. They die on arrival.</p>
+            <p><strong>Code Trails are better design docs.</strong> Visual. Shareable. Can't go stale because they ARE the code.</p>
+        </div>
+
+        <!-- Slide 8: The Real Shift -->
+        <div class="slide">
+            <h2>The Real Shift</h2>
+            <div class="visual-grid">
+                <div class="visual-box">
+                    <h3>Before</h3>
+                    <p>"Please review my PR"<br>= Take accountability for my code</p>
+                </div>
+                <div class="visual-box">
+                    <h3>With CodeTrails</h3>
+                    <p>"Does this make sense?"<br>= I value your expertise</p>
+                </div>
+            </div>
+            <p>People like being asked questions they know the answer to.</p>
+        </div>
+
+        <!-- Slide 9: Who Needs This Now -->
+        <div class="slide">
+            <h2>Who Needs This Now</h2>
+            <h3>Teams with multiple owners. Currently managed through prayer.</h3>
+            <ul>
+                <li>Platform owns infrastructure</li>
+                <li>Product owns features</li>
+                <li>Security owns compliance</li>
+                <li>Every change touches all three</li>
+            </ul>
+            <p><strong>Current solution:</strong> Design docs + 90-minute meetings + hope</p>
+            <p><strong>Our solution:</strong> One trail. Each team sees their part.</p>
+        </div>
+
+        <!-- Slide 10: Agents Broke the Math -->
+        <div class="slide">
+            <h2>Agents Broke the Math</h2>
+            <div class="visual-grid">
+                <div class="visual-box">
+                    <p>Agents write</p>
+                    <div class="big-number">10,000</div>
+                    <p>lines per hour</p>
+                </div>
+                <div class="visual-box">
+                    <p>Humans read</p>
+                    <div class="big-number">100</div>
+                    <p>lines per hour</p>
+                </div>
+            </div>
+            <p><strong>The old way is dead.</strong></p>
+            <p>CodeTrails changes the medium. Verify intention, not implementation.</p>
+        </div>
+
+        <!-- Slide 11: Open Source Reality -->
+        <div class="slide">
+            <h2>Open Source Reality</h2>
+            <div class="big-number">2,847</div>
+            <h3>open pull requests</h3>
+            <p>Every maintainer: "Sorry, it's just me."</p>
+            <div class="visual-grid">
+                <div class="visual-box">
+                    <h4>PRs</h4>
+                    <p>Show what changed (overwhelming diff)</p>
+                </div>
+                <div class="visual-box">
+                    <h4>Trails</h4>
+                    <p>Show what they intend (clear path)</p>
+                </div>
+            </div>
+            <p>We made verification visual.</p>
+        </div>
+
+        <!-- Slide 12: One Year Later -->
+        <div class="slide">
+            <h2>One Year Later</h2>
+            <h3>Your codebase has memory.</h3>
+            <ul>
+                <li>That senior who left? Their knowledge lives in trails.</li>
+                <li>New hire confused? Send trail/auth-flow.</li>
+                <li>Friday deploy broke? The trail shows what changed.</li>
+            </ul>
+            <div class="visual">
+                FileCity with trails crossing like subway lines. Each labeled and dated.
+            </div>
+            <p><strong>No more tribal knowledge. Just trails.</strong></p>
+        </div>
+
+        <!-- Slide 13: Do This Today -->
+        <div class="slide">
+            <h2>Do This Today</h2>
+            <h3>Pick your messiest cross-team feature.</h3>
+            <ul>
+                <li>Create one trail</li>
+                <li>Send it to someone who hates meetings</li>
+                <li>Watch them actually help</li>
+            </ul>
+            <p class="highlight" style="font-size: 32px; margin-top: 60px;">From tribal knowledge to trails.</p>
+            <p style="font-size: 28px; margin-top: 20px;">app.principal-ade.com</p>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">← Previous</button>
+        <div class="slide-counter">
+            <span id="current">1</span> / <span id="total">13</span>
+        </div>
+        <button class="btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        document.getElementById('total').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('current').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        });
+
+        // Initialize
+        showSlide(0);
+    </script>
+</body>
+</html>
