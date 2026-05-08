@@ -1,0 +1,1322 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>CodeTrails — The Collaboration Primitive</title>
+<link rel="stylesheet" href="styles/tokens.css" />
+<link rel="stylesheet" href="styles/deck.css" />
+<script src="deck-stage.js"></script>
+</head>
+<body>
+<deck-stage>
+
+<!-- ==================== 1. HOOK ==================== -->
+<section data-screen-label="01 Hook" class="slide-dark bg-grid-dark">
+  <div class="slide-pad" style="padding: 96px 120px;">
+    <header style="display:flex; align-items:center; justify-content:space-between;">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <img src="assets/principal-logo.svg" width="36" height="36" style="filter: drop-shadow(0 0 16px rgba(255,107,53,0.5));" alt="" />
+        <span style="font-family: var(--font-sans); font-size:18px; color: rgba(255,255,255,0.75); letter-spacing:0.02em;">
+          <span style="color:#fff; font-weight:600;">Principal</span> <span style="color: var(--primary); font-weight:300;">AI</span>
+        </span>
+      </div>
+      <span class="eyebrow-pill dark"><span class="num">01</span> The hook</span>
+    </header>
+
+    <div style="display:grid; grid-template-columns: 1.05fr 1fr; gap: 80px; align-items:center; flex:1; margin-top: 40px;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size:14px; letter-spacing:0.18em; color: var(--primary); text-transform:uppercase; margin-bottom: 28px;">
+          Code · Trails
+        </div>
+        <h1 class="h-display" style="font-size: 132px; line-height:0.98;">
+          Software<br/>
+          collaboration<br/>
+          <span style="color: var(--primary);">is broken.</span>
+        </h1>
+        <h2 class="h-section" style="font-weight:400; font-size:64px; margin-top: 24px; color: rgba(255,255,255,0.86);">
+          We fixed it.
+        </h2>
+        <p style="margin-top:48px; font-family: var(--font-sans); font-size:24px; line-height:1.55; color: rgba(255,255,255,0.72); max-width: 620px;">
+          One link. No IDE. Anyone contributes.
+        </p>
+      </div>
+
+      <!-- Hero visual: trail through code with comment -->
+      <div style="position:relative; height:680px;">
+        <div class="code-window" style="position:absolute; left:0; right:60px; top:40px; background:#0f1a44; border-color: rgba(255,255,255,0.08); color: #fff;">
+          <div class="titlebar" style="background: rgba(255,255,255,0.03); border-color: rgba(255,255,255,0.08); color: rgba(255,255,255,0.6);">
+            <div class="lights"><span></span><span></span><span></span></div>
+            payments/checkout.ts · trail/auth-flow
+          </div>
+          <div class="body" style="font-size:16px; line-height:1.85; color: rgba(255,255,255,0.85);">
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">38</span><span style="color:#7aa3ff;">function</span> <span style="color: var(--primary);">verifySession</span>(token) {</div>
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">39</span>  <span style="color:#7aa3ff;">if</span> (!token) <span style="color:#7aa3ff;">return</span> <span style="color:#76f0c4;">null</span>;</div>
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">40</span>  <span style="color:#7aa3ff;">const</span> claims = <span style="color: var(--primary);">decode</span>(token);</div>
+            <div class="hl" style="background: rgba(255,107,53,0.18); display:block; margin-right:-16px; padding-right:16px; margin-left:-16px; padding-left:16px;">
+              <span class="ln" style="color: var(--primary);">41</span>  <span style="color:#7aa3ff;">if</span> (claims.exp &lt; <span style="color: var(--primary);">now</span>()) {
+            </div>
+            <div class="hl" style="background: rgba(255,107,53,0.18); display:block; margin-right:-16px; padding-right:16px; margin-left:-16px; padding-left:16px;">
+              <span class="ln" style="color: var(--primary);">42</span>    <span style="color:#7aa3ff;">return</span> <span style="color:#76f0c4;">null</span>; <span style="color: rgba(255,255,255,0.4);">// silently expire</span>
+            </div>
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">43</span>  }</div>
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">44</span>  <span style="color:#7aa3ff;">return</span> claims;</div>
+            <div><span class="ln" style="color: rgba(255,255,255,0.3);">45</span>}</div>
+          </div>
+        </div>
+
+        <!-- Trail arrow path -->
+        <svg style="position:absolute; inset:0; pointer-events:none;" width="100%" height="100%" viewBox="0 0 720 680" preserveAspectRatio="none">
+          <path class="trail-path" d="M 60 100 C 280 100, 200 280, 360 280 S 600 460, 540 580" />
+          <circle cx="60" cy="100" r="10" class="trail-node" />
+          <circle cx="360" cy="280" r="10" class="trail-node" />
+          <circle cx="540" cy="580" r="10" class="trail-node" />
+        </svg>
+
+        <!-- Sticky note -->
+        <div class="note" style="right: 0; bottom: 60px; background: #fff;">
+          <div class="who"><span class="av">S</span> Sarah · 2 min ago</div>
+          <div class="body" style="font-size:17px;">This breaks our payment flow. Expired tokens here will silently drop charges.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot dark">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>01 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2. WHAT ACTUALLY HAPPENS ==================== -->
+<section data-screen-label="02 What actually happens" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">02</span> What actually happens</span>
+
+    <h1 class="h-mega" style="margin-top: 36px; max-width: 1500px;">
+      An engineer needs feedback<br/>
+      from someone <em style="font-style:normal; color: var(--primary);">not on their team.</em>
+    </h1>
+
+    <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 64px;">
+      <!-- Calendar abyss -->
+      <div class="card" style="padding: 32px;">
+        <div class="kicker" style="margin-bottom:16px;">The Calendar Abyss</div>
+        <h3 class="h-card">Five never show up.</h3>
+        <div style="margin-top: 24px; display:grid; grid-template-columns: repeat(5, 1fr); gap: 6px;">
+          <!-- 5 cols x 6 rows = 30 slots -->
+          <!-- Row 1 - 9am -->
+          <div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+          <div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div>
+          <div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div>
+          <div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div>
+          <div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div><div class="cal-cell"></div><div class="cal-cell taken"></div>
+          <div class="cal-cell"></div><div class="cal-cell hit"></div><div class="cal-cell"></div><div class="cal-cell"></div><div class="cal-cell"></div>
+        </div>
+        <p style="margin-top: 20px; font-family: var(--font-sans); font-size:15px; color: var(--text-secondary); line-height: 1.5;">
+          Mon · Tue · Wed · Thu · Fri — one open slot, three time zones away.
+        </p>
+        <style>
+          .cal-cell { aspect-ratio: 1.6/1; background: #f0f7f9; border-radius: 4px; }
+          .cal-cell.taken { background: #cfd9dd; }
+          .cal-cell.hit { background: var(--primary); box-shadow: 0 0 0 3px rgba(255,107,53,0.18); }
+        </style>
+      </div>
+
+      <!-- Cloning gauntlet -->
+      <div class="card" style="padding: 32px;">
+        <div class="kicker" style="margin-bottom:16px;">The Cloning Gauntlet</div>
+        <h3 class="h-card">"See line 142."</h3>
+        <div style="margin-top: 24px; font-family: var(--font-mono); font-size:14px; line-height:1.9; color: var(--text-secondary); background:#f7fcfd; border-radius:8px; padding:16px; border:1px solid var(--border);">
+          <div>$ git clone … <span style="color: var(--text-tertiary);">·  4m</span></div>
+          <div>$ pnpm install <span style="color: var(--text-tertiary);">·  3m</span></div>
+          <div>$ pnpm migrate <span style="color: var(--error);">FAILED</span></div>
+          <div>$ pnpm migrate --reset <span style="color: var(--text-tertiary);">·  2m</span></div>
+          <div>$ open ./checkout.ts <span style="color: var(--text-tertiary);">·  ?</span></div>
+          <div style="color: var(--text-tertiary); margin-top:6px;">— what was the question again?</div>
+        </div>
+      </div>
+
+      <!-- Slack thread -->
+      <div class="card" style="padding: 32px;">
+        <div class="kicker" style="margin-bottom:16px;">The Thread</div>
+        <h3 class="h-card">14 messages later.</h3>
+        <div style="margin-top:24px; display:flex; flex-direction:column; gap:10px;">
+          <div class="bub"><span class="b-who">Tom</span> screenshot?</div>
+          <div class="bub right"><span class="b-who">You</span> sec…</div>
+          <div class="bub"><span class="b-who">Tom</span> can't read it</div>
+          <div class="bub right"><span class="b-who">You</span> hop on a call?</div>
+          <div class="bub"><span class="b-who">Tom</span> tomorrow ok?</div>
+        </div>
+        <style>
+          .bub { background:#f0f7f9; padding:8px 14px; border-radius:14px; font-family:var(--font-sans); font-size:15px; max-width: 80%; line-height:1.4; color: var(--text); }
+          .bub.right { background: var(--primary-soft); align-self:flex-end; color: var(--text); }
+          .bub .b-who { font-family: var(--font-mono); font-size:11px; letter-spacing:0.10em; text-transform:uppercase; color: var(--text-tertiary); display:block; margin-bottom:2px; }
+          .bub.right .b-who { color: var(--primary); }
+        </style>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top: 56px; font-size: 26px; color: var(--text-secondary); max-width: 1300px;">
+      One writes code. <strong style="color: var(--text);">Three schedule the meeting.</strong> Five never show up.
+    </p>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>02 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. THE REAL COST ==================== -->
+<section data-screen-label="03 The real cost" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">03</span> The real cost</span>
+
+    <div style="display:grid; grid-template-columns: 1.1fr 1fr; gap: 96px; align-items:center; flex:1; margin-top: 40px;">
+      <div>
+        <h1 class="h-mega">
+          Every question<br/>
+          burns <em style="font-style:normal; color: var(--primary);">social capital.</em>
+        </h1>
+        <p class="lead" style="margin-top: 36px;">
+          Engineers track favors like accountants track receipts. So they ship broken code instead of asking for help.
+        </p>
+        <p class="lead-sm" style="margin-top: 24px; font-family: var(--font-display); font-size: 26px; color: var(--text); font-style: italic;">
+          They're not lazy. They're preserving relationships.
+        </p>
+      </div>
+
+      <!-- Ledger card -->
+      <div style="background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow: var(--sh-card); overflow:hidden;">
+        <div style="background:#0c1741; color:#fff; padding: 20px 28px; display:flex; justify-content: space-between; align-items:center;">
+          <div style="font-family: var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.7);">Favor Ledger · This Sprint</div>
+          <div style="font-family: var(--font-mono); font-size:13px; color: rgba(255,255,255,0.5);">page 4 of ∞</div>
+        </div>
+        <table style="width:100%; border-collapse: collapse; font-family: var(--font-sans);">
+          <tbody>
+            <tr class="led-row">
+              <td>Asked Tom for a quick review</td>
+              <td class="cost">−1 favor</td>
+            </tr>
+            <tr class="led-row">
+              <td>Scheduled meeting w/ Platform</td>
+              <td class="cost">−2 hours</td>
+            </tr>
+            <tr class="led-row">
+              <td>Interrupted Jane mid-flow</td>
+              <td class="cost">−1 goodwill</td>
+            </tr>
+            <tr class="led-row">
+              <td>DM'd security team in #ask-secops</td>
+              <td class="cost">−½ pride</td>
+            </tr>
+            <tr class="led-row">
+              <td>Pinged Fernando "you up?"</td>
+              <td class="cost">−1 friendship</td>
+            </tr>
+            <tr class="led-row">
+              <td>Shipped without review anyway</td>
+              <td class="cost" style="color: var(--error);">−1 outage</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding: 20px 28px; border-top: 1px solid var(--border); display:flex; justify-content:space-between; align-items:center; background:#f7fcfd;">
+          <span style="font-family: var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color: var(--text-secondary);">Balance</span>
+          <span style="font-family: var(--font-display); font-weight:700; font-size:32px; color: var(--error); letter-spacing:-0.02em;">−6.5</span>
+        </div>
+        <style>
+          .led-row td { padding: 18px 28px; border-bottom: 1px dashed var(--border); font-size:18px; color: var(--text); }
+          .led-row td.cost { text-align:right; font-family: var(--font-mono); color: var(--primary); white-space: nowrap; font-size:16px; }
+          .led-row:last-child td { border-bottom: none; }
+        </style>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>03 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. FRAME.IO COMPARISON ==================== -->
+<section data-screen-label="04 Frame.io solved this" class="bg-grid">
+  <div class="slide-pad">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between;">
+      <div>
+        <span class="eyebrow-pill"><span class="num">04</span> The precedent</span>
+        <h1 class="h-mega" style="margin-top: 24px;">
+          <span style="color: var(--text-secondary);">Frame.io solved this</span><br/>
+          for video.
+        </h1>
+        <p class="lead" style="margin-top: 28px;">Same transformation. Different medium.</p>
+      </div>
+    </div>
+
+    <!-- Comparison grid: 2 mediums × before/after -->
+    <div style="display:grid; grid-template-columns: 140px 1fr 1fr; gap: 0; margin-top: 64px; border:1px solid var(--border); border-radius:16px; overflow:hidden; background:#fff; box-shadow: var(--sh-card);">
+
+      <!-- Header row -->
+      <div style="background:#f7fcfd; border-bottom:1px solid var(--border);"></div>
+      <div style="background:#f7fcfd; padding: 18px 28px; border-bottom:1px solid var(--border); border-right:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+        <span class="tag before">Before</span>
+        <span style="font-family:var(--font-sans); font-size:15px; color: var(--text-secondary);">The IDE / The clone / The thread</span>
+      </div>
+      <div style="background:#f7fcfd; padding: 18px 28px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:10px;">
+        <span class="tag after">After</span>
+        <span style="font-family:var(--font-sans); font-size:15px; color: var(--primary);">One link. Click anywhere.</span>
+      </div>
+
+      <!-- VIDEO row -->
+      <div style="padding: 32px 24px; background:#f7fcfd; border-right:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; border-bottom:1px solid var(--border);">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--text-secondary);"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="m22 8-6 4 6 4V8Z"/></svg>
+        <div style="font-family: var(--font-display); font-size: 22px; font-weight:700;">Video</div>
+      </div>
+      <div style="padding: 36px; border-right:1px solid var(--border); border-bottom:1px solid var(--border);">
+        <div style="font-family: var(--font-mono); font-size:13px; color: var(--text-tertiary); letter-spacing: 0.06em; margin-bottom: 14px;">📧 RE: notes_v3_FINAL_v2</div>
+        <div style="font-family: var(--font-sans); font-size:18px; line-height:1.6; color: var(--text);">
+          "See notes at <span class="kbd">1:23</span>, also <span class="kbd">2:45</span>, also the green-screen thing at the end. Attached doc has the rest."
+        </div>
+      </div>
+      <div style="padding: 36px; border-bottom:1px solid var(--border); background: linear-gradient(180deg, #fff 0%, rgba(255,135,85,0.04) 100%);">
+        <div style="font-family: var(--font-mono); font-size:13px; color: var(--primary); letter-spacing: 0.06em; margin-bottom: 14px;">🔗 frame.io/r/jx9-c2</div>
+        <div style="font-family: var(--font-sans); font-size:20px; line-height:1.5; color: var(--text);">
+          Click anywhere on the timeline.<br/>
+          Drop a note. Move on.
+        </div>
+      </div>
+
+      <!-- CODE row -->
+      <div style="padding: 32px 24px; background:#f7fcfd; border-right:1px solid var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;">
+        <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--primary);"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        <div style="font-family: var(--font-display); font-size: 22px; font-weight:700;">Code</div>
+      </div>
+      <div style="padding: 36px; border-right:1px solid var(--border);">
+        <div style="font-family: var(--font-mono); font-size:13px; color: var(--text-tertiary); letter-spacing: 0.06em; margin-bottom: 14px;">💬 #eng-help</div>
+        <div style="font-family: var(--font-sans); font-size:18px; line-height:1.6; color: var(--text);">
+          "Clone the repo, check out my branch, npm install, run migrate. <span class="kbd">See line 142</span>."
+        </div>
+      </div>
+      <div style="padding: 36px; background: linear-gradient(180deg, #fff 0%, rgba(255,107,53,0.06) 100%);">
+        <div style="font-family: var(--font-mono); font-size:13px; color: var(--primary); letter-spacing: 0.06em; margin-bottom: 14px;">🔗 trail/auth-flow</div>
+        <div style="font-family: var(--font-sans); font-size:20px; line-height:1.5; color: var(--text);">
+          Click anywhere in the trail.<br/>
+          Drop a note. Move on.
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>04 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5. DIGITAL SECRETARY ==================== -->
+<section data-screen-label="05 Your digital secretary">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">05</span> What CodeTrails actually is</span>
+
+    <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items:center; flex:1; margin-top: 32px;">
+      <div>
+        <h1 class="h-mega">
+          Your digital<br/>
+          secretary <em style="font-style:normal; color: var(--primary);">filtered<br/>out the noise</em> for you.
+        </h1>
+        <ul style="margin-top: 36px; padding:0; list-style:none; display:flex; flex-direction:column; gap:18px; font-family: var(--font-sans); font-size:22px; color: var(--text); line-height:1.4; max-width:600px;">
+          <li style="display:flex; gap:14px; align-items:flex-start;"><span style="color: var(--primary); font-family: var(--font-mono); font-weight:700; flex:none;">01</span><span><strong>FileCity</strong> shows your codebase as buildings. Changed files light up.</span></li>
+          <li style="display:flex; gap:14px; align-items:flex-start;"><span style="color: var(--primary); font-family: var(--font-mono); font-weight:700; flex:none;">02</span><span>The <strong>path</strong> shows intention, not diff.</span></li>
+          <li style="display:flex; gap:14px; align-items:flex-start;"><span style="color: var(--primary); font-family: var(--font-mono); font-weight:700; flex:none;">03</span><span>Plain English explains what connects where.</span></li>
+          <li style="display:flex; gap:14px; align-items:flex-start;"><span style="color: var(--primary); font-family: var(--font-mono); font-weight:700; flex:none;">04</span><span>The ask isn't "review this." It's <em>"does this make sense?"</em></span></li>
+        </ul>
+        <p class="lead-sm" style="margin-top: 32px; font-family: var(--font-display); font-style: italic; font-size:24px; color: var(--text);">
+          Like reaching over to the desk next to you. Except they're in Prague.
+        </p>
+      </div>
+
+      <!-- Split view: file list vs filecity -->
+      <div style="display:grid; grid-template-columns: 1fr 1.3fr; gap: 24px; height: 720px;">
+        <!-- File list -->
+        <div style="background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow: var(--sh-card); overflow:hidden; display:flex; flex-direction:column;">
+          <div style="padding:14px 18px; border-bottom:1px solid var(--border); font-family: var(--font-mono); font-size:12px; letter-spacing:0.12em; text-transform:uppercase; color: var(--text-tertiary); display:flex; justify-content:space-between;">
+            <span>Changed files</span>
+            <span>14</span>
+          </div>
+          <div style="padding: 8px 0; font-family: var(--font-mono); font-size:14px; flex:1; overflow:hidden;">
+            <div class="fl"><span class="dot d-mod"></span>auth/session.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>auth/jwt.ts</div>
+            <div class="fl active"><span class="dot d-add"></span>auth/refresh.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>middleware/cors.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>payments/checkout.ts</div>
+            <div class="fl"><span class="dot d-del"></span>payments/legacy.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>routes/login.tsx</div>
+            <div class="fl"><span class="dot d-mod"></span>routes/account.tsx</div>
+            <div class="fl"><span class="dot d-add"></span>tests/auth.test.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>db/users.sql</div>
+            <div class="fl"><span class="dot d-mod"></span>config/keys.ts</div>
+            <div class="fl"><span class="dot d-mod"></span>utils/clock.ts</div>
+            <div class="fl" style="opacity:0.45;">… 2 more</div>
+          </div>
+          <style>
+            .fl { padding: 8px 18px; display:flex; align-items:center; gap:10px; color: var(--text); }
+            .fl.active { background: var(--primary-soft); color: var(--primary); font-weight:600; }
+            .fl .dot { width:8px; height:8px; border-radius:999px; flex:none; }
+            .d-mod { background: var(--secondary); }
+            .d-add { background: var(--success); }
+            .d-del { background: var(--error); }
+          </style>
+        </div>
+
+        <!-- FileCity grid (svg) -->
+        <div style="background: #0c1741; border-radius:16px; padding: 20px; box-shadow: var(--sh-card); position:relative; overflow:hidden;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div style="font-family: var(--font-mono); font-size:11px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.55);">FileCity · auth district</div>
+            <div style="font-family: var(--font-mono); font-size:11px; color: rgba(255,255,255,0.55);">14 changed</div>
+          </div>
+          <svg viewBox="0 0 480 540" style="width:100%; height: calc(100% - 32px);">
+            <!-- districts -->
+            <g>
+              <!-- background buildings (dim) -->
+              <g fill="#1c2a5c" stroke="#0c1741" stroke-width="2">
+                <rect x="20" y="20" width="80" height="60"/><rect x="105" y="20" width="50" height="80"/><rect x="160" y="20" width="60" height="50"/>
+                <rect x="225" y="20" width="40" height="70"/><rect x="270" y="20" width="70" height="60"/><rect x="345" y="20" width="50" height="40"/>
+                <rect x="400" y="20" width="60" height="80"/>
+                <rect x="20" y="105" width="60" height="100"/><rect x="85" y="105" width="40" height="60"/>
+                <rect x="225" y="100" width="55" height="110"/><rect x="285" y="95" width="35" height="60"/>
+                <rect x="20" y="220" width="50" height="80"/><rect x="75" y="220" width="60" height="60"/>
+                <rect x="140" y="220" width="40" height="100"/><rect x="185" y="220" width="55" height="70"/>
+                <rect x="245" y="220" width="35" height="90"/><rect x="285" y="220" width="50" height="60"/>
+                <rect x="340" y="220" width="60" height="80"/><rect x="405" y="220" width="55" height="70"/>
+                <rect x="20" y="320" width="60" height="80"/><rect x="85" y="320" width="40" height="120"/>
+                <rect x="130" y="320" width="60" height="80"/><rect x="195" y="320" width="40" height="60"/>
+                <rect x="240" y="320" width="50" height="100"/><rect x="295" y="320" width="35" height="70"/>
+                <rect x="335" y="320" width="60" height="90"/><rect x="400" y="320" width="60" height="60"/>
+                <rect x="20" y="445" width="40" height="60"/><rect x="65" y="445" width="60" height="80"/>
+                <rect x="130" y="445" width="55" height="50"/><rect x="190" y="445" width="40" height="70"/>
+                <rect x="235" y="445" width="60" height="60"/><rect x="300" y="445" width="40" height="80"/>
+                <rect x="345" y="445" width="55" height="50"/><rect x="405" y="445" width="55" height="70"/>
+              </g>
+              <!-- changed buildings (orange/cyan glow) -->
+              <g>
+                <rect x="105" y="20" width="50" height="80" fill="#ff6b35"/>
+                <rect x="105" y="20" width="50" height="80" fill="url(#glowOrange)" opacity="0.5"/>
+                <rect x="160" y="20" width="60" height="50" fill="#ff8755"/>
+                <rect x="225" y="100" width="55" height="110" fill="#ff6b35"/>
+                <rect x="225" y="100" width="55" height="110" fill="url(#glowOrange)" opacity="0.5"/>
+                <rect x="285" y="95" width="35" height="60" fill="#ff8755"/>
+                <rect x="245" y="220" width="35" height="90" fill="#22d3ee"/>
+                <rect x="140" y="220" width="40" height="100" fill="#0893d2"/>
+                <rect x="295" y="320" width="35" height="70" fill="#22d3ee"/>
+                <rect x="240" y="320" width="50" height="100" fill="#ff6b35"/>
+                <rect x="240" y="320" width="50" height="100" fill="url(#glowOrange)" opacity="0.5"/>
+                <rect x="345" y="445" width="55" height="50" fill="#ff8755"/>
+              </g>
+              <!-- trail path connecting changes -->
+              <path d="M 130 60 C 200 60, 200 100, 252 155 S 280 270, 260 270 S 180 280, 160 320 S 280 380, 290 380 S 380 470, 372 470" fill="none" stroke="#ff6b35" stroke-width="2.5" stroke-dasharray="5 5" opacity="0.9"/>
+              <circle cx="130" cy="60" r="6" fill="#fff" stroke="#ff6b35" stroke-width="2.5"/>
+              <circle cx="252" cy="155" r="6" fill="#fff" stroke="#ff6b35" stroke-width="2.5"/>
+              <circle cx="160" cy="270" r="6" fill="#fff" stroke="#ff6b35" stroke-width="2.5"/>
+              <circle cx="265" cy="370" r="6" fill="#fff" stroke="#ff6b35" stroke-width="2.5"/>
+              <circle cx="372" cy="470" r="6" fill="#fff" stroke="#ff6b35" stroke-width="2.5"/>
+            </g>
+            <defs>
+              <radialGradient id="glowOrange" cx="0.5" cy="0.5" r="0.7">
+                <stop offset="0%" stop-color="#ffb38a" stop-opacity="0.9"/>
+                <stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>05 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 6. HOW ENGINEERS ACTUALLY USE IT ==================== -->
+<section data-screen-label="06 How engineers actually use it" class="bg-grid">
+  <style>
+    .flow4 { display:grid; grid-template-columns: repeat(4, 1fr); gap: 28px; margin-top: 48px; }
+    .flow4 .card-step {
+      background:#fff; border:1px solid var(--border); border-radius: 16px;
+      box-shadow: var(--sh-card); padding: 28px; position:relative;
+      display:flex; flex-direction:column; gap: 18px; min-height: 460px;
+    }
+    .flow4 .step-num {
+      font-family: var(--font-mono); font-size:12px; font-weight:700;
+      letter-spacing:0.16em; text-transform:uppercase; color: var(--text-tertiary);
+    }
+    .flow4 .step-num strong { color: var(--primary); margin-right: 8px; }
+    .flow4 .who-row { display:flex; align-items:center; gap: 14px; }
+    .flow4 .who-av {
+      width:48px; height:48px; border-radius:999px; flex:none;
+      display:flex; align-items:center; justify-content:center; color:#fff;
+      font-family: var(--font-display); font-weight:700; font-size:20px;
+    }
+    .flow4 .who-name {
+      font-family: var(--font-display); font-weight:700; font-size:26px;
+      letter-spacing:-0.02em; line-height:1.1; color: var(--text);
+    }
+    .flow4 .who-role {
+      font-family: var(--font-mono); font-size:11px; font-weight:600;
+      letter-spacing:0.14em; text-transform:uppercase; color: var(--text-tertiary);
+      margin-top:2px;
+    }
+    .flow4 .step-desc { font-family: var(--font-sans); font-size:18px; line-height:1.45; color: var(--text-secondary); }
+    .flow4 .step-desc strong { color: var(--text); font-weight:600; }
+    .flow4 .quote-card {
+      margin-top:auto;
+      background:#fff7ed; border:1px solid #ffd6b8; border-radius:12px;
+      padding:14px 16px; font-family: var(--font-sans);
+      font-size:17px; line-height:1.4; color: var(--text);
+      box-shadow: 0 6px 20px rgba(255,107,53,0.12);
+    }
+    .flow4 .quote-card .qmeta { font-family: var(--font-mono); font-size:11px; letter-spacing:0.10em; text-transform:uppercase; color: var(--primary); margin-bottom:6px; font-weight:700; }
+    .flow4 .trail-pill {
+      margin-top:auto;
+      display:inline-flex; align-items:center; gap: 10px;
+      padding: 10px 14px; background: var(--primary-soft); border-radius:8px;
+      font-family: var(--font-mono); font-size:14px; color: var(--primary);
+      align-self: flex-start;
+    }
+    .flow4 .trail-pill .check { color: var(--success); font-weight:700; }
+    .flow4 .done-card { background: linear-gradient(180deg, #f7fcfd 0%, #effbf4 100%); border-color: #c9efde; }
+    .flow4 .done-mark {
+      width:72px; height:72px; border-radius:999px; background: var(--success);
+      color:#fff; display:flex; align-items:center; justify-content:center;
+      font-size:34px; font-weight:700; box-shadow: 0 8px 24px rgba(34,168,109,0.25);
+    }
+    .flow4 .done-h {
+      font-family: var(--font-display); font-weight:700; font-size:32px;
+      letter-spacing:-0.02em; color: var(--text);
+    }
+    .flow4 .done-time {
+      font-family: var(--font-mono); font-size:12px; font-weight:700;
+      letter-spacing:0.14em; text-transform:uppercase; color: var(--success);
+    }
+    .flow4 .arrow-strip {
+      position:absolute; right:-22px; top:50%; transform:translateY(-50%);
+      width:24px; height:24px; display:flex; align-items:center; justify-content:center;
+      color: var(--text-tertiary); font-family: var(--font-mono); font-size:22px; z-index: 2;
+    }
+  </style>
+
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">06</span> How engineers actually use it</span>
+
+    <h1 class="h-mega" style="margin-top: 24px;">
+      Fernando builds. Michael reviews.<br/>
+      <span style="color: var(--primary);">The agent ships.</span>
+    </h1>
+
+    <div class="flow4">
+      <!-- Step 01 -->
+      <div class="card-step">
+        <div class="step-num"><strong>Step 01</strong></div>
+        <div class="who-row">
+          <div class="who-av" style="background: var(--primary);">F</div>
+          <div>
+            <div class="who-name">Fernando</div>
+            <div class="who-role">Engineer</div>
+          </div>
+        </div>
+        <div class="step-desc">
+          Builds something. Hits a bug.<br/>
+          <strong>Creates a Code Trail.</strong> Sends link to Michael.
+        </div>
+        <div class="trail-pill">
+          <span style="width:8px; height:8px; border-radius:999px; background: var(--primary);"></span>
+          app.principal-ade.com/t/a8f2c1
+        </div>
+        <div class="arrow-strip">→</div>
+      </div>
+
+      <!-- Step 02 -->
+      <div class="card-step">
+        <div class="step-num"><strong>Step 02</strong></div>
+        <div class="who-row">
+          <div class="who-av" style="background: var(--secondary);">M</div>
+          <div>
+            <div class="who-name">Michael</div>
+            <div class="who-role">Reviewer · Browser</div>
+          </div>
+        </div>
+        <div class="step-desc">
+          Opens it. Sees the issue<br/>
+          in the sequence diagram.
+        </div>
+        <div class="quote-card">
+          <div class="qmeta">Note · line 142</div>
+          "This is deprecated — use the V2 api."
+        </div>
+        <div class="arrow-strip">→</div>
+      </div>
+
+      <!-- Step 03 -->
+      <div class="card-step">
+        <div class="step-num"><strong>Step 03</strong></div>
+        <div class="who-row">
+          <div class="who-av" style="background: linear-gradient(135deg, #0893d2, #22d3ee);">∗</div>
+          <div>
+            <div class="who-name">Fernando's Agent</div>
+            <div class="who-role">Reads the note</div>
+          </div>
+        </div>
+        <div class="step-desc">
+          Implements fix.<br/>
+          <strong>Updates the trail.</strong>
+        </div>
+        <div class="trail-pill">
+          trail/a8f2c1 · rev 2 · <span class="check">✓ resolved</span>
+        </div>
+        <div class="arrow-strip">→</div>
+      </div>
+
+      <!-- Step 04 -->
+      <div class="card-step done-card">
+        <div class="step-num"><strong>Step 04</strong></div>
+        <div class="who-row">
+          <div class="done-mark">✓</div>
+          <div>
+            <div class="done-h">Done</div>
+            <div class="done-time">Total time · minutes</div>
+          </div>
+        </div>
+        <div class="step-desc" style="margin-top: 6px;">
+          No clone-the-repo.<br/>
+          No check-out-this-branch.<br/>
+          <strong>Just a link.</strong>
+        </div>
+      </div>
+    </div>
+
+    <p class="lead-sm" style="margin-top: 36px; font-family: var(--font-display); font-style: italic; font-size:26px; color: var(--text);">
+      <span style="color: var(--text-tertiary); font-style:normal; font-family: var(--font-mono); font-size:18px; letter-spacing:0.04em;">"Clone my repo." "Check out this branch."</span>
+      &nbsp;&nbsp; Just a link.
+    </p>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>06 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 7. DESIGN DOCS ARE FICTION ==================== -->
+<section data-screen-label="07 Design docs are fiction" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">07</span> Design docs are fiction</span>
+
+    <h1 class="h-mega" style="margin-top: 28px;">
+      Engineers write them.<br/>
+      <em style="font-style:normal; color: var(--primary);">Nobody reads them.</em>
+    </h1>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; margin-top: 64px;">
+      <!-- Doc 1 -->
+      <div class="doc-tomb">
+        <div class="doc-tab"></div>
+        <div class="doc-page">
+          <div class="doc-meta">/docs/architecture-v3.md</div>
+          <h3 class="h-card" style="font-size:24px;">Architecture v3</h3>
+          <div style="margin: 16px 0; display:flex; flex-direction:column; gap:6px;">
+            <div class="doc-ln"></div><div class="doc-ln" style="width:90%;"></div><div class="doc-ln" style="width:75%;"></div>
+            <div class="doc-ln" style="width:85%;"></div><div class="doc-ln" style="width:60%;"></div>
+          </div>
+          <div class="doc-stamp">4 months stale</div>
+        </div>
+      </div>
+      <!-- Doc 2 -->
+      <div class="doc-tomb">
+        <div class="doc-tab"></div>
+        <div class="doc-page">
+          <div class="doc-meta">/rfcs/auth.md</div>
+          <h3 class="h-card" style="font-size:24px;">Auth RFC</h3>
+          <div style="margin: 16px 0; display:flex; flex-direction:column; gap:6px;">
+            <div class="doc-ln"></div><div class="doc-ln" style="width:78%;"></div><div class="doc-ln" style="width:90%;"></div>
+            <div class="doc-ln" style="width:65%;"></div><div class="doc-ln" style="width:80%;"></div>
+          </div>
+          <div class="doc-stamp">Already wrong</div>
+        </div>
+      </div>
+      <!-- Doc 3 -->
+      <div class="doc-tomb">
+        <div class="doc-tab"></div>
+        <div class="doc-page">
+          <div class="doc-meta">/plans/q3-roadmap.md</div>
+          <h3 class="h-card" style="font-size:24px;">Q3 Plan</h3>
+          <div style="margin: 16px 0; display:flex; flex-direction:column; gap:6px;">
+            <div class="doc-ln"></div><div class="doc-ln" style="width:88%;"></div><div class="doc-ln" style="width:70%;"></div>
+            <div class="doc-ln" style="width:95%;"></div><div class="doc-ln" style="width:55%;"></div>
+          </div>
+          <div class="doc-stamp">Fiction</div>
+        </div>
+      </div>
+    </div>
+    <style>
+      .doc-tomb { position:relative; transform: rotate(-1deg); }
+      .doc-tomb:nth-child(2) { transform: rotate(0.7deg); }
+      .doc-tomb:nth-child(3) { transform: rotate(-0.4deg); }
+      .doc-tab { position:absolute; left: 28px; top:-6px; width:80px; height: 14px; background: var(--border); border-radius: 4px 4px 0 0; }
+      .doc-page { background:#fff; border:1px solid var(--border); border-radius: 4px; padding: 28px; box-shadow: var(--sh-card); height: 280px; position:relative; overflow:hidden; }
+      .doc-meta { font-family: var(--font-mono); font-size:11px; color: var(--text-tertiary); letter-spacing:0.10em; text-transform:uppercase; margin-bottom: 12px; }
+      .doc-ln { height: 8px; background: rgba(12,23,65,0.10); border-radius: 4px; }
+      .doc-stamp { position:absolute; bottom: 22px; right: 22px; transform: rotate(-8deg); border:2px solid var(--error); color: var(--error); font-family: var(--font-mono); font-weight:700; font-size:13px; letter-spacing:0.12em; text-transform:uppercase; padding: 6px 14px; border-radius:4px; opacity:0.85; }
+    </style>
+
+    <div style="margin-top: 64px; display:grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items:center;">
+      <p class="lead" style="font-size: 26px;">
+        Docs live <em>outside</em> the code. They die on arrival.
+      </p>
+      <div style="background: var(--primary); color:#fff; border-radius:16px; padding: 28px 32px; box-shadow: var(--sh-cta);">
+        <div style="font-family: var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.8); margin-bottom:10px;">Code Trails are better design docs</div>
+        <div style="font-family: var(--font-display); font-size:28px; font-weight:700; line-height:1.25;">
+          Visual. Shareable. Can't go stale —<br/>because they <em>are</em> the code.
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>07 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 8. THE REAL SHIFT ==================== -->
+<section data-screen-label="08 The real shift" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">08</span> The real shift</span>
+
+    <h1 class="h-mega" style="margin-top: 24px; max-width: 1500px;">
+      From <span style="color: var(--text-secondary);">"Please review my PR"</span><br/>
+      to <span style="color: var(--primary);">"Does this make sense?"</span>
+    </h1>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 64px;">
+      <!-- BEFORE: GitHub PR notification -->
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
+          <span class="tag before">Before · dread</span>
+          <span style="font-family: var(--font-sans); font-size:16px; color: var(--text-secondary);">Take accountability for my code.</span>
+        </div>
+        <div style="background:#fff; border:1px solid var(--border); border-radius:14px; box-shadow: var(--sh-elev); padding: 24px; display:flex; gap:18px; align-items:flex-start; position:relative;">
+          <div style="width:44px; height:44px; border-radius:10px; background:#0c1741; display:flex; align-items:center; justify-content:center; flex:none; color:#fff;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.58.11.79-.25.79-.55v-2.04c-3.2.7-3.87-1.36-3.87-1.36-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.75 2.69 1.24 3.34.95.11-.74.4-1.24.72-1.53-2.55-.29-5.23-1.28-5.23-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .96-.31 3.16 1.18.92-.26 1.9-.39 2.88-.39s1.96.13 2.88.39c2.2-1.49 3.16-1.18 3.16-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.42-2.69 5.39-5.25 5.68.41.36.78 1.05.78 2.12v3.14c0 .31.21.67.79.55C20.21 21.39 23.5 17.08 23.5 12 23.5 5.65 18.35.5 12 .5z"/></svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-family: var(--font-sans); font-weight:600; color: var(--text);">github.com</div>
+              <div style="font-family: var(--font-mono); font-size:12px; color: var(--text-tertiary);">2:47 AM</div>
+            </div>
+            <div style="font-family: var(--font-display); font-weight:700; font-size:22px; color: var(--text); margin-top: 4px; line-height:1.2;">
+              [REVIEW REQUESTED] #4127
+            </div>
+            <div style="font-family: var(--font-sans); font-size:16px; color: var(--text-secondary); margin-top: 6px; line-height:1.4;">
+              Please review my PR — refactor auth flow, touches 14 files, +624 / −418
+            </div>
+            <div style="margin-top:14px; display:flex; gap:6px;">
+              <span style="font-family:var(--font-mono); font-size:11px; padding: 3px 8px; background:#fee2e2; color:#b91c1c; border-radius:4px; font-weight:700; letter-spacing:0.06em;">BLOCKING</span>
+              <span style="font-family:var(--font-mono); font-size:11px; padding: 3px 8px; background:#fef3c7; color:#92400e; border-radius:4px; font-weight:700; letter-spacing:0.06em;">URGENT</span>
+              <span style="font-family:var(--font-mono); font-size:11px; padding: 3px 8px; background:rgba(12,23,65,0.06); color: var(--text-secondary); border-radius:4px; font-weight:700; letter-spacing:0.06em;">+3 REQ</span>
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 18px; font-family: var(--font-sans); font-size:18px; color: var(--text-secondary); font-style: italic;">
+          You stare at the diff for 40 minutes. You approve. You hope.
+        </div>
+      </div>
+
+      <!-- AFTER: CodeTrail link -->
+      <div>
+        <div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
+          <span class="tag after">After · curiosity</span>
+          <span style="font-family: var(--font-sans); font-size:16px; color: var(--primary);">I value your expertise.</span>
+        </div>
+        <div style="background: linear-gradient(180deg, #fff 0%, rgba(255,107,53,0.05) 100%); border:1px solid #ffd6b8; border-radius:14px; box-shadow: var(--sh-cta); padding: 24px; display:flex; gap:18px; align-items:flex-start;">
+          <div style="width:44px; height:44px; border-radius:10px; background: var(--primary); display:flex; align-items:center; justify-content:center; flex:none; color:#fff;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </div>
+          <div style="flex:1; min-width:0;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline;">
+              <div style="font-family: var(--font-sans); font-weight:600; color: var(--text);">Fernando · Principal</div>
+              <div style="font-family: var(--font-mono); font-size:12px; color: var(--primary);">Now</div>
+            </div>
+            <div style="font-family: var(--font-display); font-weight:700; font-size:22px; color: var(--text); margin-top: 4px; line-height:1.2;">
+              Does this make sense?
+            </div>
+            <div style="font-family: var(--font-sans); font-size:16px; color: var(--text); margin-top: 6px; line-height:1.45;">
+              4 steps through the auth flow. No clone, no install — open it in your browser.
+            </div>
+            <div style="margin-top:14px; padding: 10px 14px; background:#fff; border:1px solid var(--border); border-radius:8px; font-family: var(--font-mono); font-size:13px; color: var(--primary); display:flex; align-items:center; gap:10px;">
+              <span style="width:6px; height:6px; border-radius:999px; background: var(--primary);"></span>
+              app.principal-ade.com/t/auth-refresh
+            </div>
+          </div>
+        </div>
+        <div style="margin-top: 18px; font-family: var(--font-sans); font-size:18px; color: var(--text); font-style: italic;">
+          You click. You read 4 steps. You drop one note. You're back to your day.
+        </div>
+      </div>
+    </div>
+
+    <p class="lead" style="margin-top: 56px; font-family: var(--font-display); font-style: italic; font-size: 30px; color: var(--text); text-align:center;">
+      People like being asked questions they know the answer to.
+    </p>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>08 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 9. WHO NEEDS THIS NOW ==================== -->
+<section data-screen-label="09 Who needs this now" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">09</span> Who needs this now</span>
+
+    <h1 class="h-mega" style="margin-top: 24px;">
+      Teams with multiple owners.<br/>
+      <span style="color: var(--text-secondary);">Currently managed through</span>
+      <em style="font-style:normal; color: var(--primary);">prayer.</em>
+    </h1>
+
+    <div style="display:grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items:center; flex:1; margin-top: 48px;">
+      <!-- Three overlapping territories -->
+      <div style="position:relative; height: 560px;">
+        <svg viewBox="0 0 720 560" style="width:100%; height:100%;">
+          <defs>
+            <filter id="softShadow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6" result="blur"/>
+              <feOffset dy="4"/>
+              <feComposite in2="SourceAlpha" operator="arithmetic" k2="-1" k3="1" result="shadowDiff"/>
+              <feFlood flood-color="#0c1741" flood-opacity="0.06"/>
+              <feComposite in2="shadowDiff" operator="in"/>
+              <feComposite in2="SourceGraphic" operator="over"/>
+            </filter>
+          </defs>
+          <!-- Three circles -->
+          <circle cx="240" cy="220" r="200" fill="#0893d2" fill-opacity="0.18" stroke="#0893d2" stroke-width="2"/>
+          <circle cx="480" cy="220" r="200" fill="#ff8755" fill-opacity="0.18" stroke="#ff8755" stroke-width="2"/>
+          <circle cx="360" cy="380" r="200" fill="#14b8a6" fill-opacity="0.18" stroke="#14b8a6" stroke-width="2"/>
+
+          <!-- Labels -->
+          <g font-family="Space Grotesk, system-ui" font-weight="700" text-anchor="middle">
+            <text x="160" y="160" font-size="22" fill="#0893d2">Platform</text>
+            <text x="160" y="184" font-size="14" fill="#3e6b77" font-weight="500">infrastructure</text>
+
+            <text x="560" y="160" font-size="22" fill="#ff6b35">Product</text>
+            <text x="560" y="184" font-size="14" fill="#3e6b77" font-weight="500">features</text>
+
+            <text x="360" y="490" font-size="22" fill="#14b8a6">Security</text>
+            <text x="360" y="514" font-size="14" fill="#3e6b77" font-weight="500">compliance</text>
+          </g>
+
+          <!-- Trail through center -->
+          <path d="M 110 110 C 240 280, 480 380, 600 470" fill="none" stroke="#ff6b35" stroke-width="3.5" stroke-dasharray="6 6" stroke-linecap="round"/>
+          <circle cx="110" cy="110" r="9" fill="#fff" stroke="#ff6b35" stroke-width="3.5"/>
+          <circle cx="220" cy="200" r="9" fill="#fff" stroke="#ff6b35" stroke-width="3.5"/>
+          <circle cx="360" cy="300" r="9" fill="#fff" stroke="#ff6b35" stroke-width="3.5"/>
+          <circle cx="490" cy="385" r="9" fill="#fff" stroke="#ff6b35" stroke-width="3.5"/>
+          <circle cx="600" cy="470" r="9" fill="#fff" stroke="#ff6b35" stroke-width="3.5"/>
+
+          <!-- Center label -->
+          <g transform="translate(360, 280)">
+            <rect x="-78" y="-16" width="156" height="32" rx="16" fill="#0c1741"/>
+            <text font-family="Fira Code, monospace" font-size="13" fill="#ff6b35" text-anchor="middle" y="5" letter-spacing="1.5">ONE TRAIL</text>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Right: before / after -->
+      <div style="display:flex; flex-direction:column; gap: 24px;">
+        <div style="background:#fff; border:1px solid var(--border); border-radius:14px; padding: 24px 28px;">
+          <div class="kicker" style="color: var(--text-tertiary); margin-bottom: 10px;">Today</div>
+          <div style="font-family: var(--font-display); font-size: 28px; font-weight:600; line-height:1.25; color: var(--text);">
+            Design docs <span style="color: var(--text-tertiary); font-weight:400;">+</span> 90-min meetings <span style="color: var(--text-tertiary); font-weight:400;">+</span> hope.
+          </div>
+        </div>
+        <div style="background: var(--primary); color:#fff; border-radius:14px; padding: 24px 28px; box-shadow: var(--sh-cta);">
+          <div class="kicker" style="color: rgba(255,255,255,0.85); margin-bottom: 10px;">With CodeTrails</div>
+          <div style="font-family: var(--font-display); font-size: 28px; font-weight:700; line-height:1.25;">
+            One trail. Each team sees their part.
+          </div>
+        </div>
+        <p class="lead-sm" style="margin-top: 8px;">
+          Every change touches all three. Now every team can answer for their own piece — without owning the whole thing.
+        </p>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>09 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 10. AGENTS BROKE THE MATH ==================== -->
+<section data-screen-label="10 Agents broke the math" class="slide-dark bg-grid-dark">
+  <div class="slide-pad">
+    <span class="eyebrow-pill dark"><span class="num">10</span> Agents broke the math</span>
+
+    <h1 class="h-mega" style="margin-top: 24px;">
+      The numbers <em style="font-style:normal; color: var(--primary);">don't work</em><br/>
+      anymore.
+    </h1>
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 64px; align-items:center; flex:1;">
+      <!-- Speedometers -->
+      <div style="display:flex; flex-direction:column; gap:36px;">
+        <!-- Agents -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+            <div style="font-family: var(--font-mono); font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.65);">Agent output</div>
+            <div style="font-family: var(--font-display); font-weight:700; font-size:36px; color: var(--primary);">10,000<span style="font-size:16px; font-family: var(--font-mono); color: rgba(255,255,255,0.55); margin-left:6px;">lines / hour</span></div>
+          </div>
+          <div style="height: 28px; background: rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; position:relative;">
+            <div style="height:100%; width: 100%; background: linear-gradient(90deg, var(--accent), var(--primary), #ef4444); border-radius:14px; position:relative;">
+              <div style="position:absolute; right:14px; top:50%; transform: translateY(-50%); font-family: var(--font-mono); font-size:11px; color:#fff; letter-spacing:0.14em; text-transform:uppercase; font-weight:700;">Redlined</div>
+            </div>
+          </div>
+        </div>
+        <!-- Humans -->
+        <div>
+          <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom: 14px;">
+            <div style="font-family: var(--font-mono); font-size:14px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.65);">Human comprehension</div>
+            <div style="font-family: var(--font-display); font-weight:700; font-size:36px; color: rgba(255,255,255,0.85);">100<span style="font-size:16px; font-family: var(--font-mono); color: rgba(255,255,255,0.55); margin-left:6px;">lines / hour</span></div>
+          </div>
+          <div style="height: 28px; background: rgba(255,255,255,0.08); border-radius:14px; overflow:hidden; position:relative;">
+            <div style="height:100%; width: 1%; background: var(--secondary); border-radius:14px;"></div>
+            <div style="position:absolute; left: 22px; top:50%; transform: translateY(-50%); font-family: var(--font-mono); font-size:11px; color: rgba(255,255,255,0.65); letter-spacing:0.14em; text-transform:uppercase; font-weight:700;">Crawling</div>
+          </div>
+        </div>
+
+        <!-- Ratio callout -->
+        <div style="margin-top: 16px; padding: 24px 28px; background: rgba(255,107,53,0.10); border: 1px solid rgba(255,107,53,0.3); border-radius:16px;">
+          <div style="font-family: var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.7); margin-bottom:6px;">The new ratio</div>
+          <div style="font-family: var(--font-display); font-size: 56px; font-weight:700; letter-spacing:-0.03em; color:#fff;">
+            100<span style="color: var(--primary);">:</span>1
+          </div>
+          <div style="font-family: var(--font-sans); font-size:18px; color: rgba(255,255,255,0.7); margin-top:4px;">written : readable</div>
+        </div>
+      </div>
+
+      <div>
+        <p class="lead" style="font-size:30px; line-height:1.4; max-width: 640px;">
+          The old way is dead.
+        </p>
+        <p class="lead-sm" style="margin-top: 24px; max-width: 640px; font-size: 22px;">
+          Reading every line was already a lie when humans wrote the code. With agents, it's a fantasy.
+        </p>
+        <div style="margin-top: 56px; padding: 36px; background: linear-gradient(135deg, rgba(255,107,53,0.20), rgba(255,135,85,0.05)); border:1px solid rgba(255,107,53,0.25); border-radius:20px;">
+          <div class="kicker" style="color: var(--primary); margin-bottom: 16px;">CodeTrails changes the medium</div>
+          <div style="font-family: var(--font-display); font-size: 38px; font-weight:700; line-height:1.2; letter-spacing:-0.02em; color:#fff;">
+            Verify intention.<br/>
+            Not implementation.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="slide-foot dark">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>10 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 11. OPEN SOURCE REALITY ==================== -->
+<section data-screen-label="11 Open source reality" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">11</span> Open source reality</span>
+
+    <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items:center; flex:1; margin-top: 24px;">
+      <div>
+        <div style="font-family: var(--font-display); font-weight:700; font-size: 220px; color: var(--primary); line-height:0.9; letter-spacing:-0.05em;">2,847</div>
+        <div style="font-family: var(--font-display); font-weight:600; font-size: 36px; color: var(--text); margin-top: 6px; letter-spacing:-0.02em;">open pull requests</div>
+        <div class="quote-bub" style="margin-top: 32px; font-family: var(--font-display); font-size: 28px; font-style: italic; color: var(--text); background: #fff; border:1px solid var(--border); padding: 24px 28px; border-radius:16px; box-shadow: var(--sh-card); display:block; max-width: 520px;">
+          "Sorry, it's just me."
+          <div style="font-family: var(--font-mono); font-size:13px; color: var(--text-tertiary); letter-spacing:0.10em; text-transform:uppercase; margin-top: 12px; font-style: normal;">— every maintainer</div>
+        </div>
+      </div>
+
+      <!-- Split: PR diff vs trail -->
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 28px;">
+        <!-- PR diff: wall of red/green -->
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px;">
+            <span class="tag before">PR diff</span>
+            <span style="font-family: var(--font-mono); font-size:12px; color: var(--text-tertiary); letter-spacing:0.10em; text-transform:uppercase;">Hard</span>
+          </div>
+          <div style="background:#fff; border:1px solid var(--border); border-radius: 12px; box-shadow: var(--sh-card); overflow:hidden; height: 580px;">
+            <div style="padding:10px 14px; border-bottom:1px solid var(--border); font-family: var(--font-mono); font-size:11px; color: var(--text-tertiary); letter-spacing:0.06em;">+624 / −418 across 14 files</div>
+            <div style="padding: 10px 0; font-family: var(--font-mono); font-size:11px; line-height:1.5;">
+              <!-- 100ish rows of stripes -->
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:78%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:62%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:55%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:84%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:90%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:46%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:71%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:58%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:80%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:42%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:74%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:88%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:65%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:50%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:92%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:54%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:67%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:78%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:36%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:62%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:81%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:48%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:73%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:60%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:84%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:46%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:70%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:88%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:54%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:76%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:90%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">−</span><div class="diff-bar del" style="width:42%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:82%;"></div></div>
+              <div class="diff-r"><span class="diff-ln">+</span><div class="diff-bar add" style="width:50%;"></div></div>
+            </div>
+          </div>
+          <style>
+            .diff-r { display:flex; align-items:center; gap:8px; padding: 1.5px 14px; }
+            .diff-ln { font-family: var(--font-mono); font-size:11px; color: var(--text-tertiary); width: 16px; flex:none; }
+            .diff-bar { height: 8px; border-radius: 2px; }
+            .diff-bar.add { background: #d1fae5; }
+            .diff-bar.del { background: #fee2e2; }
+          </style>
+        </div>
+
+        <!-- Trail: 4 clear steps -->
+        <div>
+          <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px;">
+            <span class="tag after">Trail</span>
+            <span style="font-family: var(--font-mono); font-size:12px; color: var(--primary); letter-spacing:0.10em; text-transform:uppercase;">Easy</span>
+          </div>
+          <div style="background:#fff; border:1px solid var(--border); border-radius: 12px; box-shadow: var(--sh-card); height: 580px; display:flex; flex-direction:column;">
+            <div style="padding:10px 14px; border-bottom:1px solid var(--border); font-family: var(--font-mono); font-size:11px; color: var(--text-tertiary); letter-spacing:0.06em;">4 steps · 2 min read</div>
+            <div style="padding: 24px; display:flex; flex-direction:column; gap: 20px; flex:1; justify-content:center;">
+              <div class="ts">
+                <div class="ts-num">1</div>
+                <div>
+                  <div class="ts-h">Token comes in</div>
+                  <div class="ts-p">middleware/auth.ts → checks shape</div>
+                </div>
+              </div>
+              <div class="ts">
+                <div class="ts-num">2</div>
+                <div>
+                  <div class="ts-h">Verify the JWT</div>
+                  <div class="ts-p">auth/jwt.ts → claims valid?</div>
+                </div>
+              </div>
+              <div class="ts">
+                <div class="ts-num">3</div>
+                <div>
+                  <div class="ts-h">Try to refresh</div>
+                  <div class="ts-p">auth/refresh.ts → expired path</div>
+                </div>
+              </div>
+              <div class="ts">
+                <div class="ts-num">4</div>
+                <div>
+                  <div class="ts-h">Hand back to checkout</div>
+                  <div class="ts-p">payments/checkout.ts → continue or 401</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+            .ts { display:grid; grid-template-columns: 44px 1fr; gap:16px; align-items:flex-start; }
+            .ts-num { width:36px; height:36px; border-radius:999px; background: var(--primary-soft); color: var(--primary); display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-weight:700; font-size:18px; }
+            .ts-h { font-family: var(--font-display); font-weight:700; font-size: 18px; color: var(--text); }
+            .ts-p { font-family: var(--font-mono); font-size:13px; color: var(--text-secondary); margin-top: 2px; }
+          </style>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 16px; display:flex; gap: 48px; align-items:center; padding: 24px 32px; background: #fff; border:1px solid var(--border); border-radius: 14px; box-shadow: var(--sh-subtle);">
+      <div>
+        <div class="kicker">Understanding</div>
+        <div style="font-family: var(--font-display); font-size:22px; font-weight:600; color: var(--text); margin-top:4px;">what code <em>does</em>: <span style="color: var(--text-secondary);">Hard.</span></div>
+      </div>
+      <div style="width:1px; height:48px; background: var(--border);"></div>
+      <div>
+        <div class="kicker">Verifying</div>
+        <div style="font-family: var(--font-display); font-size:22px; font-weight:600; color: var(--text); margin-top:4px;">it does what you <em>expect</em>: <span style="color: var(--primary);">Easy.</span></div>
+      </div>
+      <div style="margin-left:auto; font-family: var(--font-display); font-style: italic; font-size: 22px; color: var(--text);">
+        We made the second one visual.
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>11 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 12. ONE YEAR LATER ==================== -->
+<section data-screen-label="12 One year later" class="slide-dark">
+  <div class="slide-pad">
+    <span class="eyebrow-pill dark"><span class="num">12</span> One year later</span>
+
+    <h1 class="h-mega" style="margin-top: 24px;">
+      Your codebase has<br/>
+      <em style="font-style:normal; color: var(--primary);">memory.</em>
+    </h1>
+
+    <div style="display:grid; grid-template-columns: 1fr 1.2fr; gap: 80px; margin-top: 56px; align-items:center; flex:1;">
+      <!-- Left: trail entries -->
+      <div style="display:flex; flex-direction:column; gap: 18px;">
+        <div class="memo">
+          <div class="memo-h">trail / payment-rewrite</div>
+          <div class="memo-p">"That senior who left? Their knowledge lives in trails."</div>
+          <div class="memo-meta">14 notes · last touched 8 mo ago · still the best explanation we have</div>
+        </div>
+        <div class="memo">
+          <div class="memo-h">trail / auth-flow</div>
+          <div class="memo-p">"New hire confused?  Send them this."</div>
+          <div class="memo-meta">3 reviewers · 22 contributors · onboarding gold</div>
+        </div>
+        <div class="memo">
+          <div class="memo-h">trail / fri-deploy-2025-09-12</div>
+          <div class="memo-p">"Friday deploy broke?  The trail shows what changed."</div>
+          <div class="memo-meta">postmortem in 11 minutes · linked from PIR</div>
+        </div>
+        <style>
+          .memo { background: #131e4d; border:1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 22px 26px; }
+          .memo-h { font-family: var(--font-mono); font-size:13px; letter-spacing:0.14em; text-transform:uppercase; color: var(--primary); }
+          .memo-p { font-family: var(--font-display); font-size: 24px; font-weight:600; color:#fff; margin-top: 8px; line-height:1.3; }
+          .memo-meta { font-family: var(--font-mono); font-size:12px; color: rgba(255,255,255,0.5); margin-top: 8px; letter-spacing:0.04em; }
+        </style>
+      </div>
+
+      <!-- Right: FileCity with subway lines -->
+      <div style="background: #07102e; border-radius: 20px; padding: 28px; border: 1px solid rgba(255,255,255,0.08); height: 700px; position:relative; overflow:hidden;">
+        <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+          <div style="font-family: var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.55);">FileCity · all trails (last 12 mo)</div>
+          <div style="font-family: var(--font-mono); font-size:12px; color: rgba(255,255,255,0.55);">216 trails · 4 lines</div>
+        </div>
+        <svg viewBox="0 0 700 600" style="width:100%; height: calc(100% - 32px);">
+          <!-- Buildings (faint) -->
+          <g fill="#101a44" stroke="#07102e" stroke-width="2">
+            <rect x="20" y="40" width="60" height="80"/><rect x="85" y="60" width="40" height="60"/>
+            <rect x="130" y="30" width="50" height="90"/><rect x="185" y="50" width="60" height="70"/>
+            <rect x="250" y="40" width="40" height="80"/><rect x="295" y="60" width="55" height="60"/>
+            <rect x="355" y="30" width="50" height="90"/><rect x="410" y="50" width="60" height="70"/>
+            <rect x="475" y="40" width="50" height="80"/><rect x="530" y="55" width="55" height="65"/>
+            <rect x="590" y="30" width="40" height="90"/><rect x="635" y="50" width="50" height="70"/>
+            <rect x="20" y="140" width="50" height="100"/><rect x="75" y="160" width="55" height="80"/>
+            <rect x="135" y="150" width="40" height="90"/><rect x="180" y="170" width="60" height="70"/>
+            <rect x="245" y="140" width="50" height="100"/><rect x="300" y="160" width="40" height="80"/>
+            <rect x="345" y="150" width="55" height="90"/><rect x="405" y="170" width="50" height="70"/>
+            <rect x="460" y="140" width="50" height="100"/><rect x="515" y="160" width="60" height="80"/>
+            <rect x="580" y="150" width="40" height="90"/><rect x="625" y="170" width="60" height="70"/>
+            <rect x="20" y="260" width="60" height="80"/><rect x="85" y="280" width="40" height="60"/>
+            <rect x="130" y="270" width="50" height="70"/><rect x="185" y="290" width="55" height="50"/>
+            <rect x="250" y="260" width="40" height="80"/><rect x="295" y="280" width="60" height="60"/>
+            <rect x="360" y="270" width="50" height="70"/><rect x="415" y="290" width="55" height="50"/>
+            <rect x="475" y="260" width="50" height="80"/><rect x="530" y="280" width="40" height="60"/>
+            <rect x="575" y="270" width="60" height="70"/><rect x="640" y="290" width="45" height="50"/>
+            <rect x="20" y="360" width="55" height="100"/><rect x="80" y="380" width="50" height="80"/>
+            <rect x="135" y="370" width="60" height="90"/><rect x="200" y="390" width="50" height="70"/>
+            <rect x="255" y="360" width="55" height="100"/><rect x="315" y="380" width="40" height="80"/>
+            <rect x="360" y="370" width="60" height="90"/><rect x="425" y="390" width="50" height="70"/>
+            <rect x="480" y="360" width="55" height="100"/><rect x="540" y="380" width="50" height="80"/>
+            <rect x="595" y="370" width="55" height="90"/><rect x="655" y="390" width="35" height="70"/>
+            <rect x="20" y="480" width="40" height="80"/><rect x="65" y="500" width="55" height="60"/>
+            <rect x="125" y="490" width="50" height="70"/><rect x="180" y="510" width="40" height="50"/>
+            <rect x="225" y="480" width="55" height="80"/><rect x="285" y="500" width="50" height="60"/>
+            <rect x="340" y="490" width="60" height="70"/><rect x="405" y="510" width="40" height="50"/>
+            <rect x="450" y="480" width="55" height="80"/><rect x="510" y="500" width="50" height="60"/>
+            <rect x="565" y="490" width="55" height="70"/><rect x="625" y="510" width="50" height="50"/>
+          </g>
+
+          <!-- Subway lines (4 trails) -->
+          <g fill="none" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Auth (orange) -->
+            <path d="M 50 90 C 200 90, 240 220, 360 220 S 500 320, 620 320" stroke="#ff6b35"/>
+            <!-- Payments (cyan) -->
+            <path d="M 60 540 C 180 540, 220 410, 320 410 S 440 290, 560 290 S 660 180, 660 90" stroke="#22d3ee"/>
+            <!-- Onboarding (green) -->
+            <path d="M 80 200 C 230 200, 280 320, 380 320 S 510 470, 660 470" stroke="#14b8a6"/>
+            <!-- Deploy/PIR (purple) -->
+            <path d="M 50 360 C 220 360, 260 480, 380 480 S 520 380, 640 380" stroke="#a78bfa"/>
+          </g>
+
+          <!-- Stations -->
+          <g>
+            <circle cx="50" cy="90" r="7" fill="#fff" stroke="#ff6b35" stroke-width="3"/>
+            <circle cx="240" cy="120" r="7" fill="#fff" stroke="#ff6b35" stroke-width="3"/>
+            <circle cx="360" cy="220" r="7" fill="#fff" stroke="#ff6b35" stroke-width="3"/>
+            <circle cx="500" cy="290" r="7" fill="#fff" stroke="#ff6b35" stroke-width="3"/>
+            <circle cx="620" cy="320" r="7" fill="#fff" stroke="#ff6b35" stroke-width="3"/>
+
+            <circle cx="60" cy="540" r="7" fill="#fff" stroke="#22d3ee" stroke-width="3"/>
+            <circle cx="220" cy="500" r="7" fill="#fff" stroke="#22d3ee" stroke-width="3"/>
+            <circle cx="440" cy="320" r="7" fill="#fff" stroke="#22d3ee" stroke-width="3"/>
+            <circle cx="560" cy="200" r="7" fill="#fff" stroke="#22d3ee" stroke-width="3"/>
+            <circle cx="660" cy="90" r="7" fill="#fff" stroke="#22d3ee" stroke-width="3"/>
+
+            <circle cx="80" cy="200" r="7" fill="#fff" stroke="#14b8a6" stroke-width="3"/>
+            <circle cx="280" cy="280" r="7" fill="#fff" stroke="#14b8a6" stroke-width="3"/>
+            <circle cx="380" cy="320" r="7" fill="#fff" stroke="#14b8a6" stroke-width="3"/>
+            <circle cx="510" cy="430" r="7" fill="#fff" stroke="#14b8a6" stroke-width="3"/>
+            <circle cx="660" cy="470" r="7" fill="#fff" stroke="#14b8a6" stroke-width="3"/>
+
+            <circle cx="50" cy="360" r="7" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+            <circle cx="220" cy="430" r="7" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+            <circle cx="380" cy="480" r="7" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+            <circle cx="520" cy="430" r="7" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+            <circle cx="640" cy="380" r="7" fill="#fff" stroke="#a78bfa" stroke-width="3"/>
+          </g>
+
+          <!-- Line labels -->
+          <g font-family="Fira Code, monospace" font-size="11" font-weight="700" letter-spacing="1.5">
+            <g transform="translate(640 320)">
+              <rect x="-44" y="-14" width="88" height="22" rx="4" fill="#ff6b35"/>
+              <text fill="#fff" text-anchor="middle" y="2">AUTH · 14 NOTES</text>
+            </g>
+            <g transform="translate(660 75)">
+              <rect x="-50" y="-14" width="100" height="22" rx="4" fill="#22d3ee"/>
+              <text fill="#0c1741" text-anchor="middle" y="2">PAYMENTS · 9</text>
+            </g>
+            <g transform="translate(660 455)">
+              <rect x="-58" y="-14" width="116" height="22" rx="4" fill="#14b8a6"/>
+              <text fill="#fff" text-anchor="middle" y="2">ONBOARDING · 22</text>
+            </g>
+            <g transform="translate(640 365)">
+              <rect x="-40" y="-14" width="80" height="22" rx="4" fill="#a78bfa"/>
+              <text fill="#fff" text-anchor="middle" y="2">DEPLOY · 7</text>
+            </g>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+    <p class="lead-sm" style="margin-top: 24px; font-family: var(--font-display); font-style: italic; font-size: 26px; color: rgba(255,255,255,0.86);">
+      No more tribal knowledge. Just trails.
+    </p>
+
+    <div class="slide-foot dark">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>12 / 13</span>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 13. DO THIS TODAY ==================== -->
+<section data-screen-label="13 Do this today" class="bg-grid">
+  <div class="slide-pad">
+    <span class="eyebrow-pill"><span class="num">13</span> Do this today</span>
+
+    <div style="display:grid; grid-template-columns: 1fr 1.05fr; gap: 96px; align-items:center; flex:1; margin-top: 24px;">
+      <div>
+        <h1 class="h-mega" style="font-size: 104px; line-height: 1.0;">
+          Pick your<br/>
+          <em style="font-style:normal; color: var(--primary);">messiest</em><br/>
+          cross-team<br/>
+          feature.
+        </h1>
+        <ol style="list-style:none; padding:0; margin: 48px 0 0; display:flex; flex-direction:column; gap:18px;">
+          <li class="cta-step">
+            <span class="cta-num">1</span>
+            <span class="cta-text">Create one trail.</span>
+          </li>
+          <li class="cta-step">
+            <span class="cta-num">2</span>
+            <span class="cta-text">Send it to someone who hates meetings.</span>
+          </li>
+          <li class="cta-step">
+            <span class="cta-num">3</span>
+            <span class="cta-text">Watch them <em>actually</em> help.</span>
+          </li>
+        </ol>
+        <style>
+          .cta-step { display:grid; grid-template-columns: 56px 1fr; gap: 22px; align-items:center; }
+          .cta-num { width:56px; height:56px; border-radius: 14px; background: var(--primary); color:#fff; display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-weight:700; font-size:24px; box-shadow: var(--sh-cta); }
+          .cta-text { font-family: var(--font-display); font-size: 32px; font-weight:600; color: var(--text); letter-spacing:-0.01em; }
+        </style>
+      </div>
+
+      <!-- Trail with three notes -->
+      <div style="position: relative; height: 720px;">
+        <div class="code-window" style="position:absolute; left: 0; right: 0; top: 60px;">
+          <div class="titlebar"><div class="lights"><span></span><span></span><span></span></div>app.principal-ade.com / t / billing-rewrite</div>
+          <div class="body" style="font-size:15px; line-height:1.95; padding: 20px 24px;">
+            <div><span class="ln">12</span><span class="kw">async function</span> <span class="fn">chargeCard</span>(invoice) {</div>
+            <div><span class="ln">13</span>  <span class="kw">const</span> token = <span class="kw">await</span> <span class="fn">getToken</span>(invoice.user);</div>
+            <div class="hl"><span class="ln">14</span>  <span class="kw">if</span> (!token) <span class="kw">throw new</span> <span class="fn">PaymentError</span>(<span class="str">'no_session'</span>);</div>
+            <div><span class="ln">15</span>  <span class="kw">const</span> result = <span class="kw">await</span> <span class="fn">stripe</span>.charges.create({</div>
+            <div><span class="ln">16</span>    amount: invoice.total,</div>
+            <div class="hl"><span class="ln">17</span>    currency: invoice.currency, <span class="cm">// FX rounding?</span></div>
+            <div><span class="ln">18</span>    customer: token.customerId,</div>
+            <div><span class="ln">19</span>  });</div>
+            <div class="hl"><span class="ln">20</span>  <span class="kw">await</span> <span class="fn">audit</span>(<span class="str">'charge'</span>, result);</div>
+            <div><span class="ln">21</span>  <span class="kw">return</span> result;</div>
+            <div><span class="ln">22</span>}</div>
+          </div>
+        </div>
+
+        <!-- Three notes from different people -->
+        <div class="note" style="left: -40px; top: 0; max-width: 280px; background:#fff;">
+          <div class="who"><span class="av" style="background: var(--secondary);">P</span> Priya · Platform · 9m ago</div>
+          <div class="body">FX rounding here will cost us pennies on every transaction.</div>
+        </div>
+        <div class="note" style="right: -40px; top: 280px; max-width: 280px; background:#fff;">
+          <div class="who"><span class="av" style="background: var(--success);">D</span> Diego · Security · 12m ago</div>
+          <div class="body">Audit log needs the user_id, not just the charge id. PCI auditors will ask.</div>
+        </div>
+        <div class="note" style="left: 60px; bottom: 40px; max-width: 280px; background:#fff;">
+          <div class="who"><span class="av" style="background: var(--primary);">M</span> Mei · Product · 4m ago</div>
+          <div class="body">Looks right. ✓ no PR needed from my side.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 36px; display:flex; justify-content: space-between; align-items: center; padding: 28px 36px; background: var(--text); color:#fff; border-radius: 16px;">
+      <div style="display:flex; align-items:center; gap: 14px;">
+        <img src="assets/principal-logo.svg" width="32" height="32" alt="" />
+        <div>
+          <div style="font-family: var(--font-mono); font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color: rgba(255,255,255,0.6);">From tribal knowledge to trails</div>
+          <div style="font-family: var(--font-display); font-size: 26px; font-weight:700; margin-top:2px;">app.principal-ade.com</div>
+        </div>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <a href="#" style="display:inline-flex; align-items:center; gap:8px; padding: 14px 24px; background: var(--primary); color:#fff; border-radius:10px; font-family: var(--font-sans); font-weight:600; font-size:18px; text-decoration:none; box-shadow: var(--sh-cta);">
+          Create your first trail
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="slide-foot">
+      <span class="foot-mark"><span class="dot"></span> CodeTrails by Principal AI</span>
+      <span>13 / 13</span>
+    </div>
+  </div>
+</section>
+
+</deck-stage>
+</body>
+</html>

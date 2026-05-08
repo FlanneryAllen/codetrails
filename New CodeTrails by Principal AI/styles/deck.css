@@ -1,0 +1,356 @@
+/* CodeTrails deck — built on Principal AI tokens */
+
+* { box-sizing: border-box; }
+
+deck-stage {
+  --slide-w: 1920px;
+  --slide-h: 1080px;
+  background: #0a0f24;
+}
+
+deck-stage > section {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  background: var(--background);
+  color: var(--text);
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* ============= Common slide chrome ============= */
+.slide-pad {
+  position: absolute;
+  inset: 0;
+  padding: 88px 112px;
+  display: flex;
+  flex-direction: column;
+}
+
+.slide-foot {
+  position: absolute;
+  left: 112px;
+  right: 112px;
+  bottom: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+}
+
+.slide-foot.dark { color: rgba(255,255,255,0.55); }
+
+.foot-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  letter-spacing: 0.10em;
+}
+.foot-mark .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--primary); }
+
+/* ============= Eyebrow with index pill ============= */
+.eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px 6px 6px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.eyebrow-pill .num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary);
+  color: #fff;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.06em;
+}
+.eyebrow-pill.dark {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.7);
+}
+
+/* ============= Headlines ============= */
+.h-display {
+  font-family: var(--font-display);
+  font-size: 120px;
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: -0.04em;
+  color: var(--text);
+  margin: 0;
+}
+.h-mega {
+  font-family: var(--font-display);
+  font-size: 96px;
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  color: var(--text);
+  margin: 0;
+}
+.h-section {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  margin: 0;
+}
+.h-card {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+.h-tang { color: var(--primary); }
+.h-blue { color: var(--secondary); }
+.h-navy { color: var(--text); }
+
+.lead {
+  font-family: var(--font-sans);
+  font-size: 28px;
+  line-height: 1.45;
+  font-weight: 400;
+  color: var(--text);
+  max-width: 1100px;
+  text-wrap: balance;
+}
+.lead-sm {
+  font-family: var(--font-sans);
+  font-size: 22px;
+  line-height: 1.55;
+  color: var(--text-secondary);
+  max-width: 900px;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--primary);
+}
+
+/* ============= Cards ============= */
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  box-shadow: var(--sh-card);
+  padding: 32px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+}
+.tag.before { background: rgba(12,23,65,0.06); color: var(--text-secondary); }
+.tag.after  { background: var(--primary-soft); color: var(--primary); }
+
+/* ============= Wordmark / brand ============= */
+.codetrails-mark {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+.codetrails-mark .by {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  font-size: 0.18em;
+  display: inline-block;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+/* ============= DARK slide variant ============= */
+.slide-dark {
+  background: #0c1741 !important;
+  color: #fff;
+}
+.slide-dark .h-display,
+.slide-dark .h-mega,
+.slide-dark .h-section,
+.slide-dark .h-card,
+.slide-dark .h-navy { color: #fff; }
+.slide-dark .lead { color: rgba(255,255,255,0.86); }
+.slide-dark .lead-sm { color: rgba(255,255,255,0.62); }
+.slide-dark .card {
+  background: #131e4d;
+  border-color: rgba(255,255,255,0.08);
+  box-shadow: 0 12px 48px rgba(0,0,0,0.4);
+  color: #fff;
+}
+
+/* ============= Subtle grid background for some slides ============= */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(12,23,65,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(12,23,65,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+.bg-grid-dark {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+
+/* ============= Trail / nodes ============= */
+.trail-stage {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--sh-card);
+  overflow: hidden;
+}
+
+.code-window {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.7;
+}
+.code-window .titlebar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  background: #f7fcfd;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  color: var(--text-tertiary);
+}
+.code-window .titlebar .lights {
+  display: flex; gap: 6px; margin-right: 8px;
+}
+.code-window .titlebar .lights span {
+  width: 10px; height: 10px; border-radius: 999px; background: #e5edf2;
+}
+.code-window .body {
+  padding: 14px 16px;
+  color: var(--text);
+}
+.code-window .ln { color: var(--text-tertiary); display: inline-block; width: 28px; text-align: right; padding-right: 12px; user-select: none; }
+.code-window .kw { color: var(--secondary); }
+.code-window .fn { color: var(--primary); }
+.code-window .str { color: var(--success); }
+.code-window .cm { color: var(--text-tertiary); font-style: italic; }
+.code-window .hl { background: rgba(255,107,53,0.12); margin-left: -16px; padding-left: 16px; margin-right: -16px; padding-right: 16px; display: block; }
+
+/* Sticky note */
+.note {
+  position: absolute;
+  background: #fff7ed;
+  border: 1px solid #ffd6b8;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 12px 32px rgba(255,107,53,0.18);
+  font-family: var(--font-sans);
+  max-width: 320px;
+}
+.note .who {
+  display: flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+.note .who .av {
+  width: 18px; height: 18px; border-radius: 999px;
+  background: var(--primary); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 10px;
+}
+.note .body {
+  font-size: 16px; line-height: 1.4; color: var(--text);
+}
+
+/* Avatar circle */
+.av-circle {
+  width: 40px; height: 40px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-family: var(--font-sans); font-weight: 700; font-size: 14px;
+  color: #fff; flex: none;
+}
+
+/* ============= Trail svg path style ============= */
+.trail-path {
+  fill: none;
+  stroke: var(--primary);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 6 6;
+}
+.trail-node {
+  fill: #fff;
+  stroke: var(--primary);
+  stroke-width: 3;
+}
+
+/* ============= Misc ============= */
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 24px 0;
+}
+
+.kbd {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: rgba(12,23,65,0.05);
+  padding: 2px 8px;
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.callout-num {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--primary);
+  line-height: 0.9;
+}

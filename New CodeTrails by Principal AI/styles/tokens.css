@@ -1,0 +1,316 @@
+/* ==========================================================================
+   Principal AI — Design System Tokens
+   "Ice Tangerine" light palette + display/body/mono type
+   Source of truth: src/app/globals.css and DESIGN_SYSTEM.md from
+   github.com/principal-ade/landing-page
+   ========================================================================== */
+
+/* ---------- Fonts (local TTF files in fonts/) ----- */
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter-Variable.ttf') format('truetype-variations');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-Variable.ttf') format('truetype-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('fonts/SpaceGrotesk-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-Variable.ttf') format('truetype-variations');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('fonts/FiraCode-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* ---------- Brand / Surface ---------- */
+  --background: #f7fcfd;       /* page bg — pale cyan-tinted white */
+  --surface:    #ffffff;       /* cards, sheets */
+  --border:     #dffff5;       /* mint hairlines */
+
+  /* ---------- Text ---------- */
+  --foreground:      #0c1741;  /* primary text — deep navy */
+  --text:            #0c1741;
+  --text-secondary:  #3e6b77;  /* slate-teal — body, captions */
+  --text-tertiary:   #5a8a96;  /* lighter slate — meta, footers */
+  --text-on-primary: #ffffff;
+  --text-on-accent:  #ffffff;
+  --text-muted:      #8aa9b3;
+
+  /* ---------- Brand colors ---------- */
+  --primary:    #ff6b35;       /* Tangerine — CTAs, brand */
+  --primary-dim: #e85a26;
+  --primary-soft: #ff87551a;   /* ~10% tangerine — pill bg */
+  --secondary: #0893d2;        /* Cool blue — secondary actions */
+  --accent:    #ff8755;        /* Warm orange — highlight blocks */
+  --accent-2:  #22d3ee;        /* Ice cyan — chips, accents */
+
+  /* ---------- Semantic ---------- */
+  --success: #14b8a6;          /* teal */
+  --error:   #ef4444;
+  --warning: #f59e0b;
+  --info:    #2563eb;
+
+  /* ---------- Typography ---------- */
+  --font-sans:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+  --font-mono:    'Fira Code', 'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  /* ---------- Type scale (8pt grid) ---------- */
+  --fs-12: 12px; --fs-13: 13px; --fs-14: 14px; --fs-15: 15px;
+  --fs-16: 16px; --fs-17: 17px; --fs-18: 18px; --fs-20: 20px;
+  --fs-22: 22px; --fs-24: 24px; --fs-28: 28px; --fs-32: 32px;
+  --fs-40: 40px; --fs-44: 44px; --fs-48: 48px; --fs-64: 64px;
+  --fs-80: 80px; --fs-120: 120px;
+
+  /* ---------- Spacing (8pt grid) ---------- */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-14: 56px; --sp-16: 64px; --sp-20: 80px;
+
+  /* ---------- Radii ---------- */
+  --r-sm: 6px;
+  --r-md: 8px;     /* buttons, inputs */
+  --r-lg: 12px;    /* containers, panels */
+  --r-xl: 16px;    /* feature cards */
+  --r-2xl: 20px;   /* badges (pill) */
+  --r-full: 999px;
+
+  /* ---------- Shadows ---------- */
+  --sh-subtle:  0 2px 8px rgba(12, 23, 65, 0.04);
+  --sh-card:    0 4px 12px rgba(8, 147, 210, 0.10);
+  --sh-cta:     0 4px 12px rgba(255, 107, 53, 0.30);
+  --sh-cta-hov: 0 6px 16px rgba(255, 107, 53, 0.40);
+  --sh-elev:    0 8px 24px rgba(12, 23, 65, 0.12), 0 2px 6px rgba(12, 23, 65, 0.08);
+  --sh-accent:  0 8px 24px rgba(255, 135, 85, 0.30);
+
+  /* ---------- Motion ---------- */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --t-fast: 0.2s;
+  --t-med:  0.4s;
+  --t-slow: 0.6s;
+}
+
+/* ==========================================================================
+   Semantic typography classes — apply these or use as a reference
+   ========================================================================== */
+
+html { color: var(--text); background: var(--background); }
+body { font-family: var(--font-sans); }
+
+/* Hero — h1 mega (homepage display, 1 of 1 per page) */
+.t-display-mega {
+  font-family: var(--font-display);
+  font-size: var(--fs-120);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--primary);
+}
+
+/* Hero secondary line / page hero */
+.t-display-xl {
+  font-family: var(--font-display);
+  font-size: var(--fs-64);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--text);
+}
+
+/* Section headers */
+.t-h1 {
+  font-family: var(--font-display);
+  font-size: var(--fs-48);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.t-h2 {
+  font-family: var(--font-display);
+  font-size: var(--fs-32);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.t-h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-22);
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--text);
+}
+
+/* Body */
+.t-body-lg {
+  font-family: var(--font-sans);
+  font-size: var(--fs-22);
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.t-body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-16);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--text);
+}
+
+.t-body-sm {
+  font-family: var(--font-sans);
+  font-size: var(--fs-14);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* Eyebrow / section label */
+.t-eyebrow {
+  font-family: var(--font-mono);
+  font-size: var(--fs-12);
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+/* Ultra-tiny tag inside pill badges */
+.t-pill {
+  font-family: var(--font-sans);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Inline code / mono */
+.t-mono {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  background: rgba(12, 23, 65, 0.05);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--text);
+}
+
+/* Caption / meta (date · author lines) */
+.t-meta {
+  font-family: var(--font-sans);
+  font-size: var(--fs-13);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--text-tertiary);
+}
