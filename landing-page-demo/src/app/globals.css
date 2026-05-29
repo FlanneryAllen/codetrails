@@ -1,0 +1,241 @@
+@import "tailwindcss";
+
+:root {
+  /* Ice Tangerine Color Palette */
+  --background: #f7fcfd;
+  --surface: #ffffff;
+  --primary: #ff6b35;
+  --secondary: #0893d2;
+  --accent: #ff8755;
+  --accent-2: #22d3ee;
+  --foreground: #0c1741;
+  --text: #0c1741;
+  --text-secondary: #3e6b77;
+  --border: #dffff5;
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-foreground: var(--foreground);
+  --color-text: var(--text);
+  --color-text-secondary: var(--text-secondary);
+  --color-border: var(--border);
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-fira-code);
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter, Arial, Helvetica, sans-serif);
+}
+
+/* Custom animation for slow spin */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Flip Card Animation Styles */
+.flip-card {
+  perspective: 1000px;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 0.5rem; /* rounded-lg */
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+}
+
+/* ========================================
+   Apple-Inspired Blog Post Design System
+   (Ice Tangerine Light Theme)
+   ======================================== */
+
+/* Container - wider reading width */
+.blog-post-content {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+/* Headline (H1) - Maximum impact, dark navy */
+.blog-post-content h1 {
+  font-size: 2.25rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em !important;
+  line-height: 1.2 !important;
+  color: #0c1741 !important;
+  margin-bottom: 12px !important;
+  margin-top: 40px !important;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif !important;
+}
+
+/* Metadata (date/author) - Subtle, doesn't compete */
+.blog-post-content h1 + p,
+.blog-post-content h1 + p em {
+  font-size: 13px !important;
+  font-weight: 400 !important;
+  color: #3e6b77 !important;
+  letter-spacing: 0.01em !important;
+  margin-bottom: 36px !important;
+  font-style: normal !important;
+}
+
+/* Subheads (H2) - Clear hierarchy */
+.blog-post-content h2 {
+  font-size: 1.375rem !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.3 !important;
+  color: #0c1741 !important;
+  margin-top: 40px !important;
+  margin-bottom: 16px !important;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif !important;
+}
+
+/* Subheads (H3) - Tertiary level */
+.blog-post-content h3 {
+  font-size: 1.125rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+  color: #0c1741 !important;
+  margin-top: 32px !important;
+  margin-bottom: 12px !important;
+  font-family: var(--font-space-grotesk), system-ui, sans-serif !important;
+}
+
+/* Body copy - Comfortable reading */
+.blog-post-content p {
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: #3e6b77 !important;
+  margin-bottom: 20px !important;
+  letter-spacing: 0.02em !important;
+}
+
+/* Bold text in body - Darker for emphasis */
+.blog-post-content strong {
+  font-weight: 600 !important;
+  color: #0c1741 !important;
+}
+
+/* Links - Tangerine accent */
+.blog-post-content a {
+  color: #ff6b35 !important;
+  text-decoration: none !important;
+  transition: opacity 0.2s ease !important;
+}
+
+.blog-post-content a:hover {
+  opacity: 0.8 !important;
+}
+
+/* Lists - Consistent with body copy */
+.blog-post-content ul,
+.blog-post-content ol {
+  font-size: 0.9375rem !important;
+  font-weight: 400 !important;
+  line-height: 1.7 !important;
+  color: #3e6b77 !important;
+  margin-bottom: 20px !important;
+  padding-left: 24px !important;
+}
+
+.blog-post-content li {
+  margin-bottom: 8px !important;
+}
+
+/* Blockquotes - Distinctive but subtle */
+.blog-post-content blockquote {
+  border-left: 3px solid #dffff5 !important;
+  padding-left: 24px !important;
+  margin: 32px 0 !important;
+  font-style: italic !important;
+  color: #3e6b77 !important;
+}
+
+/* Code blocks - Subtle background */
+.blog-post-content code {
+  background: rgba(12, 23, 65, 0.05) !important;
+  padding: 2px 6px !important;
+  border-radius: 4px !important;
+  font-size: 0.9em !important;
+}
+
+/* Fade in animation */
+.blog-post-content {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Fix dnd-kit drag overlay visibility
+   The library's drag overlay has no z-index, causing it to render
+   behind fixed-position containers. This ensures drag previews
+   appear above all application UI. */
+[data-dnd-kit-drag-overlay] {
+  z-index: 99999 !important;
+}
+
+/* Also ensure the drag overlay from the kanban panel styles is visible */
+.drag-overlay {
+  z-index: 99999 !important;
+}
