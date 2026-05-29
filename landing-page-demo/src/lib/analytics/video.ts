@@ -2,9 +2,11 @@
 // Integrates with the existing analytics core system
 
 import { event } from './core';
+import { getVideoBatcher } from './videoBatcher';
 
 /**
  * Track video play event
+ * Sent immediately (not batched) as it's a high-priority event
  */
 export const trackVideoPlay = (
   videoId: string,
@@ -47,6 +49,7 @@ export const trackVideoPause = (
 
 /**
  * Track video progress milestone
+ * Batched to avoid overwhelming analytics with frequent updates
  */
 export const trackVideoProgress = (
   videoId: string,
@@ -55,7 +58,8 @@ export const trackVideoProgress = (
   currentTime: number,
   duration: number
 ): void => {
-  event({
+  const batcher = getVideoBatcher();
+  batcher.enqueue({
     action: 'video_progress',
     category: 'Video',
     label: `${videoTitle} - ${milestone}%`,
@@ -105,5 +109,51 @@ export const trackVideoError = (
     video_id: videoId,
     video_title: videoTitle,
     error_message: errorMessage,
+  });
+};
+
+/**
+ * Track video rewatch
+ * Called when a user replays a video they've already completed
+ */
+export const trackVideoRewatch = (
+  videoId: string,
+  videoTitle: string,
+  rewatchCount: number
+): void => {
+  event({
+    action: 'video_rewatch',
+    category: 'Video',
+    label: videoTitle,
+    value: rewatchCount,
+    video_id: videoId,
+    video_title: videoTitle,
+    rewatch_count: rewatchCount,
+  });
+};
+
+/**
+ * Track video drop-off
+ * Called when a user pauses/leaves without completing the video
+ */
+export const trackVideoDropOff = (
+  videoId: string,
+  videoTitle: string,
+  dropOffTime: number,
+  duration: number,
+  progressPercent: number,
+  watchDuration: number
+): void => {
+  event({
+    action: 'video_drop_off',
+    category: 'Video',
+    label: `${videoTitle} - ${progressPercent}%`,
+    value: Math.round(dropOffTime),
+    video_id: videoId,
+    video_title: videoTitle,
+    drop_off_time: dropOffTime,
+    duration: duration,
+    progress_percent: progressPercent,
+    watch_duration: watchDuration,
   });
 };

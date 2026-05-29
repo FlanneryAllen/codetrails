@@ -1,8 +1,15 @@
 // Video engagement tracking hook
-// Tracks play, pause, progress milestones, and completion events
+// Tracks play, pause, progress milestones, completion, rewatches, and drop-offs
 
 import { useEffect, useRef, useCallback } from 'react';
-import { trackVideoPlay, trackVideoPause, trackVideoProgress, trackVideoComplete } from '../video';
+import {
+  trackVideoPlay,
+  trackVideoPause,
+  trackVideoProgress,
+  trackVideoComplete,
+  trackVideoRewatch,
+  trackVideoDropOff
+} from '../video';
 
 interface UseVideoTrackingOptions {
   videoId: string;
@@ -20,9 +27,20 @@ export const useVideoTracking = ({
   const lastProgressRef = useRef<number>(0);
   const hasCompletedRef = useRef<boolean>(false);
   const playStartTimeRef = useRef<number | null>(null);
+  const rewatchCountRef = useRef<number>(0);
 
   const handlePlay = useCallback(() => {
     playStartTimeRef.current = Date.now();
+
+    // Check if this is a rewatch (playing after completion)
+    if (hasCompletedRef.current) {
+      rewatchCountRef.current += 1;
+      trackVideoRewatch(videoId, videoTitle, rewatchCountRef.current);
+      // Reset completion flag to allow tracking completion again
+      hasCompletedRef.current = false;
+      lastProgressRef.current = 0;
+    }
+
     trackVideoPlay(videoId, videoTitle);
   }, [videoId, videoTitle]);
 
@@ -30,6 +48,13 @@ export const useVideoTracking = ({
     const watchDuration = playStartTimeRef.current
       ? (Date.now() - playStartTimeRef.current) / 1000
       : 0;
+
+    const progressPercent = Math.floor((currentTime / duration) * 100);
+
+    // Track drop-off if video not completed and user is past 5% (to filter out accidental clicks)
+    if (!hasCompletedRef.current && progressPercent >= 5 && progressPercent < 95) {
+      trackVideoDropOff(videoId, videoTitle, currentTime, duration, progressPercent, watchDuration);
+    }
 
     trackVideoPause(videoId, videoTitle, currentTime, duration, watchDuration);
     playStartTimeRef.current = null;
@@ -61,6 +86,7 @@ export const useVideoTracking = ({
     lastProgressRef.current = 0;
     hasCompletedRef.current = false;
     playStartTimeRef.current = null;
+    rewatchCountRef.current = 0;
   }, []);
 
   return {
